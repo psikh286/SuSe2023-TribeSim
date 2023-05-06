@@ -2,6 +2,6 @@
 
 public interface IFood
 {
-    public Vector3 Position { get; set; }
+    public Transform Transform { get; }
     public void EatFood();
 }

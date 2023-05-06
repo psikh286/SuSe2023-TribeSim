@@ -4,8 +4,13 @@ namespace BehaviorTree
 {
     public class Selector : Node
     {
-        public Selector() { }
-        public Selector(List<Node> children) : base(children) { }
+        protected readonly List<Node> _children;
+
+        public Selector(BTree root ,List<Node> children)
+        {
+            _children = children;
+            _root = root;
+        }
 
         /* If any of the children reports a success, the selector will 
            immediately report a success upwards. If all children fail, 
@@ -32,7 +37,6 @@ namespace BehaviorTree
             _state = NodeState.FAILURE;
             return _state;
         }
-
     }
 
 }

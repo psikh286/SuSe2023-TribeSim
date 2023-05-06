@@ -4,8 +4,13 @@ namespace BehaviorTree
 {
     public class Sequence : Node
     {
-        public Sequence() { }
-        public Sequence(List<Node> children) : base(children) { }
+        protected readonly List<Node> _children;
+        
+        public Sequence(BTree root, List<Node> children)
+        {
+            _children = children;
+            _root = root;
+        }
 
         /* If any child node returns a failure, the entire node fails. Whence all  
            nodes return a success, the node reports a success. */ 
@@ -34,7 +39,6 @@ namespace BehaviorTree
             _state = anyChildIsRunning ? NodeState.RUNNING : NodeState.SUCCESS;
             return _state;
         }
-
     }
 
 }

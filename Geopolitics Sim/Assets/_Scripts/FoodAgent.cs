@@ -49,7 +49,7 @@ public class FoodAgent : MonoBehaviour
                 _food ??= _foodFinder.FindFood();
                 if (_food != null)
                 {
-                    _targetPoint = _food.Position;
+                    _targetPoint = _food.Transform.position;
                     _state = State.Eat;
                     break;
                 }
