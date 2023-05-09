@@ -9,7 +9,7 @@ namespace BehaviorTree
 
         private Dictionary<string, object> _data = new();
 
-        protected void Start()
+        protected void Awake()
         {
             _root = SetupTree();
         }

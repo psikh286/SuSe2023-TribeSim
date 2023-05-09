@@ -1,4 +1,5 @@
 ﻿using BehaviorTree;
+using UnityEngine;
 
 public class TaskReproduce : Node
 {
@@ -10,12 +11,18 @@ public class TaskReproduce : Node
     public override NodeState Evaluate()
     {
         var mate = (FoodAgentTree)_root.GetData("mate");
+
+        var a = (float)_root.GetData("speed");
+        var b = (float)mate.GetData("speed");
+        var c = ((a + b) * 0.5f) + Utility.RandomFloat();
         
-        mate.Impregnate((FoodAgentTree)_root);
+        c = Mathf.Clamp(c ,GlobalSettings.MinSpeed, GlobalSettings.MaxSpeed);
         
-        _root.ClearData("mate");
-        _root.ClearData("target");
-        _root.SetData("foodCount", (int)_root.GetData("foodCount") - 2);
+        var offspring = Object.Instantiate(_root, _root.transform.position, Quaternion.identity);
+        offspring.SetData("speed", c);
+        
+        mate.Impregnate();
+        ((FoodAgentTree)_root).Impregnate();
         
         _state = NodeState.RUNNING;
         return _state;

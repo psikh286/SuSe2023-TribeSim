@@ -6,14 +6,20 @@ public class SettingsSO : ScriptableObject
     [SerializeField] private int _foodToRep;
     [SerializeField] private int _foodToSurvive;
 
+    [SerializeField] private float _minSpeed;
+    [SerializeField] private float _maxSpeed;
+
     private void OnEnable()
     {
         OnValidate();
+        Debug.Log("SO is fine");
     }
 
     private void OnValidate()
     {
         GlobalSettings.SetFoodToRep(_foodToRep);
         GlobalSettings.SetFoodToSurvive(_foodToSurvive);
+        GlobalSettings.SetMinSpeed(_minSpeed);
+        GlobalSettings.SetMaxSpeed(_maxSpeed);
     }
 }
