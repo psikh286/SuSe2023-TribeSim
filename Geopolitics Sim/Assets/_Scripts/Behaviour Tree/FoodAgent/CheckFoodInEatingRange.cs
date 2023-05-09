@@ -13,8 +13,8 @@ public class CheckFoodInEatingRange : Node
 
     public override NodeState Evaluate()
     {
-        var f = _root.GetData("food");
-        var t = (Transform)_root.GetData("target");
+        var f = (Object)_root.GetData("food");
+        var t = (Object)_root.GetData("target");
         
         if (f == null || t == null)
         {
@@ -23,7 +23,8 @@ public class CheckFoodInEatingRange : Node
             return _state;
         }
 
-        _state = Vector3.Distance(_transform.position, t.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
+        var target = (Transform)t;
+        _state = Vector3.Distance(_transform.position, target.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
 
         return _state;
     }

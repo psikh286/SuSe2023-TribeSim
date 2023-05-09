@@ -10,8 +10,8 @@ public class CheckWaitingForMate : Node
     
     public override NodeState Evaluate()
     {
-        var m = (FoodAgentTree)_root.GetData("mate");
-        var t = (Transform)_root.GetData("target");
+        var m = (Object)_root.GetData("mate");
+        var t = (Object)_root.GetData("target");
         if (m == null || t == null)
         {
             _root.ClearData("mate");

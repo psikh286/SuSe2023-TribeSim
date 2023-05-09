@@ -13,7 +13,7 @@ public class CheckFoodInFOVRange : Node
     
     public override NodeState Evaluate()
     {
-        var f = _root.GetData("food");
+        var f = (Object)_root.GetData("food");
         if (f != null)
         {
             _state = NodeState.SUCCESS;

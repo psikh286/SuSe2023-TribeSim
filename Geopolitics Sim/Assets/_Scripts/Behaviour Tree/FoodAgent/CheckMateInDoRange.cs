@@ -10,8 +10,8 @@ public class CheckMateInDoRange : Node
     
     public override NodeState Evaluate()
     {
-        var m = _root.GetData("mate");
-        var t = (Transform)_root.GetData("target");
+        var m = (Object)_root.GetData("mate");
+        var t = (Object)_root.GetData("target");
         if (m == null || t == null)
         {
             _state = NodeState.FAILURE;
@@ -19,7 +19,8 @@ public class CheckMateInDoRange : Node
             return _state;
         }
 
-        _state = Vector3.Distance(_root.transform.position, t.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
+        var target = (Transform)t;
+        _state = Vector3.Distance(_root.transform.position, target.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
 
         return _state;
     }

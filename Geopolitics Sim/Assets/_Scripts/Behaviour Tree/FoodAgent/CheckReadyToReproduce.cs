@@ -1,4 +1,5 @@
 ﻿using BehaviorTree;
+using UnityEngine;
 
 public class CheckReadyToReproduce : Node
 {
@@ -9,7 +10,7 @@ public class CheckReadyToReproduce : Node
     
     public override NodeState Evaluate()
     {
-        var r = _root.GetData("mate");
+        var r = (Object)_root.GetData("mate");
         if (r != null)
         {
             _state = NodeState.SUCCESS;

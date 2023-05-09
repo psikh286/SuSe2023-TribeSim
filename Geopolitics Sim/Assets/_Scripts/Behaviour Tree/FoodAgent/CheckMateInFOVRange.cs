@@ -13,7 +13,7 @@ public class CheckMateInFOVRange : Node
     
     public override NodeState Evaluate()
     {
-        var m = _root.GetData("mate");
+        var m = (Object)_root.GetData("mate");
         if (m != null)
         {
             _state = NodeState.SUCCESS;
