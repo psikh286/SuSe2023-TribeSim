@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BehaviorTree;
-using UnityEngine;
 
 public class FoodAgentTree : BTree
 {
@@ -66,5 +65,6 @@ public class FoodAgentTree : BTree
     {
         ClearData("mate");
         ClearData("target");
+        SetData("foodCount", (int)GetData("foodCount") - 2);
     }
 }

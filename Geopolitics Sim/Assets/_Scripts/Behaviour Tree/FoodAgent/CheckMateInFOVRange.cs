@@ -61,5 +61,4 @@ public class CheckMateInFOVRange : Node
             mate = female;
         }
     }
-
 }
