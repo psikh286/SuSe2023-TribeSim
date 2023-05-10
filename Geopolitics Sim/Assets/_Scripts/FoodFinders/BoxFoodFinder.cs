@@ -19,6 +19,7 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
 
     private void OnDrawGizmos()
     {
+        if(!_drawGizmos) return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(transform.position, _halfSize * 2f);
     }
