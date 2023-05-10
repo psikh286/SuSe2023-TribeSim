@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class FoodAgentTree : BTree
 {
+    public static Action<int> OnAgentSpawn;
+    
     private IEnumerator Start()
     {
         StartCoroutine(Death());
@@ -27,6 +31,7 @@ public class FoodAgentTree : BTree
             yield break;
         }
         
+        OnAgentSpawn?.Invoke(-1);
         Destroy(gameObject);
     }
 
@@ -76,6 +81,9 @@ public class FoodAgentTree : BTree
         
         SetData("speed", 2f);
         SetData("foodCount", 0);
+        
+        OnAgentSpawn?.Invoke(1);
+        
         return node;
     }
     
