@@ -16,7 +16,7 @@ public class FoodAgentTree : BTree
         yield return new WaitForSeconds(1f);
         var t = (float)GetData("speed");
         var c = t / GlobalSettings.MaxSpeed;
-        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.green, Color.red, c);
+        GetComponent<MeshRenderer>().material.color = Color.Lerp(Color.yellow, Color.green, c);
     }
 
     private IEnumerator Death()
