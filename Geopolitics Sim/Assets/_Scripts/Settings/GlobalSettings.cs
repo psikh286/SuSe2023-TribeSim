@@ -13,4 +13,9 @@
 
     public static void SetMinSpeed(float i) => MinSpeed = i;
     public static void SetMaxSpeed(float i) => MaxSpeed = i;
+
+
+    public static float MutationMultiplier { get; private set; }
+
+    public static void SetMutationMultiplier(float f) => MutationMultiplier = f;
 }

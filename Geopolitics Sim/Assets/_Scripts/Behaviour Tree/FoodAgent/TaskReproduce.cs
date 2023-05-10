@@ -14,7 +14,7 @@ public class TaskReproduce : Node
 
         var a = (float)_root.GetData("speed");
         var b = (float)mate.GetData("speed");
-        var c = ((a + b) * 0.5f) + Utility.RandomFloat();
+        var c = ((a + b) * 0.5f) + Utility.RandomFloat() * GlobalSettings.MutationMultiplier;
         
         c = Mathf.Clamp(c ,GlobalSettings.MinSpeed, GlobalSettings.MaxSpeed);
         

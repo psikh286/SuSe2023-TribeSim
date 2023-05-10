@@ -9,6 +9,8 @@ public class SettingsSO : ScriptableObject
     [SerializeField] private float _minSpeed;
     [SerializeField] private float _maxSpeed;
 
+    [SerializeField] private float _mutationMultiplier;
+
     private void OnEnable()
     {
         OnValidate();
@@ -21,5 +23,6 @@ public class SettingsSO : ScriptableObject
         GlobalSettings.SetFoodToSurvive(_foodToSurvive);
         GlobalSettings.SetMinSpeed(_minSpeed);
         GlobalSettings.SetMaxSpeed(_maxSpeed);
+        GlobalSettings.SetMutationMultiplier(_mutationMultiplier);
     }
 }
