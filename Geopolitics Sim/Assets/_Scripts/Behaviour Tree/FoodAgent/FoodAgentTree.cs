@@ -7,7 +7,9 @@ using Object = UnityEngine.Object;
 
 public class FoodAgentTree : BTree
 {
-    public static Action<int> OnAgentSpawn;
+    public static Action<int, int> OnAgentSpawn;
+
+    private int _colorIndex;
     
     private IEnumerator Start()
     {
@@ -19,12 +21,23 @@ public class FoodAgentTree : BTree
 
 
         var mat = GetComponent<MeshRenderer>().material;
-        mat.color = c switch
+        switch (c)
         {
-            < 0.3f => Color.red,
-            < 0.6f => Color.yellow,
-            _ => Color.green
-        };
+            case < 0.3f:
+                mat.color = Color.red;
+                _colorIndex = 0;
+                break;
+            case < 0.6f:
+                mat.color = Color.yellow;
+                _colorIndex = 1;
+                break;
+            default:
+                mat.color = Color.green;
+                _colorIndex = 2;
+                break;
+        }
+        
+        OnAgentSpawn?.Invoke(1, _colorIndex);
     }
 
     private IEnumerator Death()
@@ -39,7 +52,7 @@ public class FoodAgentTree : BTree
             yield break;
         }
         
-        OnAgentSpawn?.Invoke(-1);
+        OnAgentSpawn?.Invoke(-1, _colorIndex);
         Destroy(gameObject);
     }
 
@@ -90,7 +103,7 @@ public class FoodAgentTree : BTree
         SetData("speed", 2f);
         SetData("foodCount", 0);
         
-        OnAgentSpawn?.Invoke(1);
+        
         
         return node;
     }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _tmp;
+    [SerializeField] private TMP_Text[] _tmp;
 
-    private int _count;
+    private int[] _count = new int[3];
 
     private void OnEnable()
     {
@@ -17,10 +17,10 @@ public class Counter : MonoBehaviour
         FoodAgentTree.OnAgentSpawn -= OnAgentSpawn;
     }
 
-    private void OnAgentSpawn(int obj)
+    private void OnAgentSpawn(int obj, int i)
     {
-        _count += obj;
+        _count[i] += obj;
 
-        _tmp.text = $"{_count}";
+        _tmp[i].text = $"{_count[i]}";
     }
 }
