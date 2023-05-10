@@ -14,15 +14,16 @@ public class SettingsSO : ScriptableObject
     private void OnEnable()
     {
         OnValidate();
-        Debug.Log("SO is fine");
     }
 
-    private void OnValidate()
+    public void OnValidate()
     {
         GlobalSettings.SetFoodToRep(_foodToRep);
         GlobalSettings.SetFoodToSurvive(_foodToSurvive);
         GlobalSettings.SetMinSpeed(_minSpeed);
         GlobalSettings.SetMaxSpeed(_maxSpeed);
         GlobalSettings.SetMutationMultiplier(_mutationMultiplier);
+        
+        Debug.Log("SO is fine");
     }
 }

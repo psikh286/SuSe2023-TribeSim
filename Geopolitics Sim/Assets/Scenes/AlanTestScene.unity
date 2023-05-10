@@ -5632,6 +5632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dead31d1f54470e8afb0ac9065aa3c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _s: {fileID: 11400000, guid: bfe1f92b485cc024a98846dc93268238, type: 2}
   _prefab: {fileID: 2398695324090967370, guid: c0afaba30a779dc4d92713f5d93ca10c, type: 3}
   _bounds: {x: 50, y: 1, z: 50}
   _prefabsPerSpawn: 20
