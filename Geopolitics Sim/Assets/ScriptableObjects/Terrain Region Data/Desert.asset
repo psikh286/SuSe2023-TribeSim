@@ -20,3 +20,5 @@ MonoBehaviour:
   availableResources:
   - resourceType: 0
     quantity: 2
+  - resourceType: 1
+    quantity: 0

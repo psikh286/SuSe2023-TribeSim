@@ -7,10 +7,15 @@ public class TerrainManager : MonoBehaviour
     public List<TerrainRegionData> terrainTypes;
     private TerrainRegionData[,] grid;
 
+    public Renderer terrainRenderer;
+
     void Awake()
     {
         grid = new TerrainRegionData[width, height];
         PopulateGrid();
+
+        Texture2D texture = GenerateTexture();
+        terrainRenderer.material.mainTexture = texture;
     }
 
     public TerrainRegionData GetTerrainRegionData(Vector3 position)
@@ -53,5 +58,22 @@ public class TerrainManager : MonoBehaviour
         // If we haven't returned yet, return the last terrain type.
         return terrainTypes[terrainTypes.Count - 1];
     }
+    Texture2D GenerateTexture()
+    {
+        Texture2D texture = new Texture2D(width, height);
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                Color color = grid[x, y].terrainColor;
+                texture.SetPixel(x, y, color);
+            }
+        }
+
+        texture.Apply();
+        return texture;
+    }
+    
 
 }

@@ -17,4 +17,8 @@ MonoBehaviour:
   shelterAvailability: 0.35479373
   survivalFactor: 0.39631873
   terrainDifficulty: 0.39048082
-  availableResources: []
+  availableResources:
+  - resourceType: 0
+    quantity: 5
+  - resourceType: 1
+    quantity: 5
