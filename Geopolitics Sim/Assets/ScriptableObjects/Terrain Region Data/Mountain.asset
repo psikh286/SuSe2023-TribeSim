@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a3a29a4d69e0e347a4f5befea87702d, type: 3}
-  m_Name: Test
+  m_Name: Mountain
   m_EditorClassIdentifier: 
+  terrainColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
   terrainType: 0
-  shelterAvailability: 0
-  survivalFactor: 0
-  terrainDifficulty: 0
-  availableResources: []
+  shelterAvailability: 0.6258056
+  survivalFactor: 0.28795666
+  terrainDifficulty: 0.47460562
+  availableResources:
+  - resourceType: 0
+    quantity: 5
