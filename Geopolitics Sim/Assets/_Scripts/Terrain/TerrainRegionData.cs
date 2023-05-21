@@ -5,11 +5,14 @@ using UnityEngine;
 public class TerrainRegionData : ScriptableObject
 {
     public enum TerrainType { Mountain, Forest, Desert, Water }
+    
+    public Color terrainColor;
 
     public TerrainType terrainType;
     public float shelterAvailability;
     public float survivalFactor;
     public float terrainDifficulty;
     public List<Resource> availableResources;
+    
 }
 
