@@ -3,20 +3,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action<bool> OnTick;
+    public static Action OnTick;
 
-    public void Tick(bool b)
+    public void Tick()
     {
-        OnTick?.Invoke(b);
+        OnTick?.Invoke();
     }
-}
-
-public enum State
-{
-    Eat,
-    SearchFood,
-    SearchMate,
-    Reproduce,
-    Basic
 }
 

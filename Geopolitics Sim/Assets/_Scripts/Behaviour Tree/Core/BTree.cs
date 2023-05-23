@@ -7,12 +7,9 @@ namespace BehaviorTree
     {
         private Node _root;
 
-        private Dictionary<string, object> _data = new();
+        private readonly Dictionary<string, object> _data = new();
 
-        protected void Awake()
-        {
-            _root = SetupTree();
-        }
+        protected void Awake() => _root = SetupTree();
 
         protected void OnTick()
         {
