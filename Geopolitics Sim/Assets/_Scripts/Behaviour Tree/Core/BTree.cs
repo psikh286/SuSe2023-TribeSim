@@ -14,7 +14,7 @@ namespace BehaviorTree
             _root = SetupTree();
         }
 
-        protected void OnTick(bool b)
+        protected void OnTick()
         {
             _root?.Evaluate();
         }

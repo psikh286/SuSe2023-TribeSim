@@ -58,7 +58,7 @@ public class FoodAgentTree : BTree
 
     private void Update()
     {
-        OnTick(true);
+        OnTick();
     }
 
     protected override Node SetupTree()
