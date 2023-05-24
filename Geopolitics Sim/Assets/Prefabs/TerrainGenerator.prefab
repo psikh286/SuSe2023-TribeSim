@@ -46,14 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  levelOfDetail: 0
-  noiseScale: 25
+  normalizeMode: 1
+  editorPreviewLOD: 0
+  noiseScale: 89.19
   octaves: 10
   persistance: 0.5
   lacunarity: 2
-  seed: 34
+  seed: 39
   offset: {x: 51, y: 0}
-  meshHeightMultiplier: 18
+  useFalloff: 1
+  meshHeightMultiplier: 25.7
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -108,7 +110,7 @@ MonoBehaviour:
   autoUpdate: 1
   regions:
   - name: Deep Water
-    height: 0.25
+    height: 0
     colour: {r: 0, g: 0.18538672, b: 0.8207547, a: 1}
   - name: Shallow Water
     height: 0.3
