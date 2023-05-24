@@ -23,7 +23,5 @@ public class SettingsSO : ScriptableObject
         GlobalSettings.SetMinSpeed(_minSpeed);
         GlobalSettings.SetMaxSpeed(_maxSpeed);
         GlobalSettings.SetMutationMultiplier(_mutationMultiplier);
-        
-        Debug.Log("SO is fine");
     }
 }
