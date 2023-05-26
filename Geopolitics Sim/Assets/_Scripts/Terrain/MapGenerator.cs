@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour {
 	public int editorPreviewLOD;
 	public float noiseScale;
 
+	[Range(10, 20)]
 	public int octaves;
 	[Range(0,1)]
 	public float persistance;
