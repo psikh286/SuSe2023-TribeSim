@@ -113,7 +113,7 @@ MonoBehaviour:
     height: 0
     colour: {r: 0, g: 0.18538672, b: 0.8207547, a: 1}
   - name: Shallow Water
-    height: 0.3
+    height: 0.36
     colour: {r: 0, g: 0.54011995, b: 0.9339623, a: 1}
   - name: Sand
     height: 0.4
