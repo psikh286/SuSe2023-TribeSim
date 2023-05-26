@@ -13,9 +13,4 @@ MonoBehaviour:
   m_Name: TextureData
   m_EditorClassIdentifier: 
   autoUpdate: 1
-  baseColours:
-  - {r: 0.514151, g: 1, b: 0.97177404, a: 0}
-  - {r: 0.5653567, g: 1, b: 0.5137255, a: 0}
-  baseStartHeights:
-  - 0.11
-  - 0.342
+  layers: []
