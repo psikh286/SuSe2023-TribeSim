@@ -46,16 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  normalizeMode: 1
+  normalizeMode: 0
   editorPreviewLOD: 0
-  noiseScale: 89.19
+  noiseScale: 95.2
   octaves: 10
   persistance: 0.5
   lacunarity: 2
-  seed: 39
+  seed: 91
   offset: {x: 51, y: 0}
   useFalloff: 1
-  meshHeightMultiplier: 25.7
+  meshHeightMultiplier: 30
   meshHeightCurve:
     serializedVersion: 2
     m_Curve:
@@ -113,13 +113,13 @@ MonoBehaviour:
     height: 0
     colour: {r: 0, g: 0.18538672, b: 0.8207547, a: 1}
   - name: Shallow Water
-    height: 0.3
+    height: 0.36
     colour: {r: 0, g: 0.54011995, b: 0.9339623, a: 1}
   - name: Sand
     height: 0.4
     colour: {r: 0.94787484, g: 0.9528302, b: 0.48989856, a: 1}
   - name: Grass
-    height: 0.55
+    height: 0.5
     colour: {r: 0.3208689, g: 0.754717, b: 0.18867925, a: 1}
   - name: Forest
     height: 0.66
@@ -131,7 +131,7 @@ MonoBehaviour:
     height: 0.85
     colour: {r: 0.4245283, g: 0.3508425, b: 0.25431648, a: 1}
   - name: Snow
-    height: 1
+    height: 0.93
     colour: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &8162074985731009116
 MonoBehaviour:

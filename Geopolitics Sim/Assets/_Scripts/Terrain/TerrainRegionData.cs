@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "TerrainRegionData", menuName = "Terrain/TerrainRegionData", order = 1)]
+[CreateAssetMenu(fileName = "RegionData", menuName = "Terrain/RegionData", order = 1)]
 public class TerrainRegionData : ScriptableObject
 {
     public enum TerrainType { Mountain, Forest, Desert, Water }
