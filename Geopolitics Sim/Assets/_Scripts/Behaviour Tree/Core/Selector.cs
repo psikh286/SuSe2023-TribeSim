@@ -6,7 +6,7 @@ namespace BehaviorTree
     {
         protected readonly List<Node> _children;
 
-        public Selector(BTree root ,List<Node> children)
+        public Selector(FoodAgentTree root ,List<Node> children)
         {
             _children = children;
             _root = root;

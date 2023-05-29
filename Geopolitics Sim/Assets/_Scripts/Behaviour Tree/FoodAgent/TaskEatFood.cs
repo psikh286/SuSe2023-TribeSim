@@ -1,23 +1,20 @@
 ﻿using BehaviorTree;
-using UnityEngine;
 
 public class TaskEatFood : Node
 {
-    public TaskEatFood(BTree root)
+    public TaskEatFood(FoodAgentTree root)
     {
         _root = root;
     }
 
     public override NodeState Evaluate()
     {
-        var food = (IFood)_root.GetData("food");
-        var foodCount = (int)_root.GetData("foodCount");
+        _root.Food.EatFood();
+
+        _root.IncreaseFoodCount();
         
-        food.EatFood();
-        
-        _root.SetData("foodCount", foodCount + 1);
-        _root.ClearData("food");
-        _root.ClearData("target");
+        _root.Food = null;
+        _root.Target = null;
         
         _state = NodeState.RUNNING;
         return _state;

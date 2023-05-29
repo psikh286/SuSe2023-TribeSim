@@ -17,10 +17,8 @@ public class Counter : MonoBehaviour
         FoodAgentTree.OnAgentSpawn -= OnAgentSpawn;
     }
 
-    private void OnAgentSpawn(int obj, int i)
+    private void OnAgentSpawn()
     {
-        _count[i] += obj;
-
-        _tmp[i].text = $"{_count[i]}";
+        
     }
 }

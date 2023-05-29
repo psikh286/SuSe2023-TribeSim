@@ -6,7 +6,7 @@ namespace BehaviorTree
     {
         protected readonly List<Node> _children;
         
-        public Sequence(BTree root, List<Node> children)
+        public Sequence(FoodAgentTree root, List<Node> children)
         {
             _children = children;
             _root = root;

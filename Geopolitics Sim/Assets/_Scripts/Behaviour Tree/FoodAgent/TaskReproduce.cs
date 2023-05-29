@@ -3,28 +3,34 @@ using UnityEngine;
 
 public class TaskReproduce : Node
 {
-    public TaskReproduce(BTree root)
+    public TaskReproduce(FoodAgentTree root)
     {
         _root = root;
     }
     
     public override NodeState Evaluate()
     {
-        var mate = (FoodAgentTree)_root.GetData("mate");
+        var mate = _root.Mate;
 
-        var a = (float)_root.GetData("speed");
-        var b = (float)mate.GetData("speed");
-        var c = ((a + b) * 0.5f) + Utility.RandomFloat() * GlobalSettings.MutationMultiplier * Utility.RandomInt(-1, 2);
+        var speed = CalculateSpeed(_root.Speed, mate.Speed);
         
-        c = Mathf.Clamp(c ,GlobalSettings.MinSpeed, GlobalSettings.MaxSpeed);
+       
         
         var offspring = Object.Instantiate(_root, _root.transform.position, Quaternion.identity);
-        offspring.SetData("speed", c);
+        offspring.Init(speed);
         
-        mate.Impregnate();
-        ((FoodAgentTree)_root).Impregnate();
+        mate.Reproduced();
+        _root.Reproduced();
         
         _state = NodeState.RUNNING;
         return _state;
+    }
+
+    private float CalculateSpeed(float a, float b)
+    {
+        var c = (a + b) * 0.5f + Utility.RandomFloat() * GlobalSettings.MutationMultiplier * Utility.RandomInt(-1, 2);
+        c = Mathf.Clamp(c ,GlobalSettings.MinSpeed, GlobalSettings.MaxSpeed);
+        
+        return c;
     }
 }

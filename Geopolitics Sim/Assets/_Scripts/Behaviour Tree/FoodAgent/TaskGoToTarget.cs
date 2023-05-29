@@ -5,7 +5,7 @@ public class TaskGoToTarget : Node
 {
     private readonly Transform _transform;
     
-    public TaskGoToTarget(BTree root)
+    public TaskGoToTarget(FoodAgentTree root)
     {
         _root = root;
         _transform = root.transform;
@@ -13,8 +13,8 @@ public class TaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
-        var target = (Transform)_root.GetData("target");
-        var speed = (float)_root.GetData("speed");
+        var target = _root.Target;
+        var speed = _root.Speed;
         
         if (Vector3.Distance(_transform.position, target.position) > 0.01f)
         {

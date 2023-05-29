@@ -6,7 +6,7 @@ public class TaskWander : Node
     private readonly Transform _transform;
     private Vector3 _targetPoint;
     
-    public TaskWander(BTree root)
+    public TaskWander(FoodAgentTree root)
     {
         _root = root;
         _transform = root.transform;
@@ -15,7 +15,7 @@ public class TaskWander : Node
 
     public override NodeState Evaluate()
     {
-        var speed = (float)_root.GetData("speed");
+        var speed = _root.Speed;
         
         if (Vector3.Distance(_transform.position, _targetPoint) < 0.01f)
         {

@@ -3,28 +3,24 @@ using UnityEngine;
 
 public class CheckFoodInEatingRange : Node
 {
-    private readonly Transform _transform;
-    
-    public CheckFoodInEatingRange(BTree root)
+    public CheckFoodInEatingRange(FoodAgentTree root)
     {
         _root = root;
-        _transform = root.transform;
     }
 
     public override NodeState Evaluate()
     {
-        var f = (Object)_root.GetData("food");
-        var t = (Object)_root.GetData("target");
+        var food = _root.Food;
+        var target = _root.Target;
         
-        if (f == null || t == null)
+        if (food == null || target == null)
         {
             _state = NodeState.FAILURE;
-            _root.ClearData("food");
+            _root.Food = null;
             return _state;
         }
 
-        var target = (Transform)t;
-        _state = Vector3.Distance(_transform.position, target.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
+        _state = Vector3.Distance(_root.transform.position, target.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
 
         return _state;
     }

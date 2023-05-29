@@ -1,64 +1,47 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 public class FoodAgentTree : BTree
 {
-    public static Action<int, int> OnAgentSpawn;
-
+    public static Action OnAgentSpawn;
     private int _colorIndex;
+
+
+    [SerializeField] private float _speed;
+    [SerializeField] private int _foodCount;
     
-    private IEnumerator Start()
-    {
-        StartCoroutine(Death());
-        
-        yield return new WaitForSeconds(1f);
-        var t = (float)GetData("speed");
-        var c = Mathf.InverseLerp(GlobalSettings.MinSpeed, GlobalSettings.MaxSpeed, t);
+    /*INITIALIZE*/
+    public float Speed => _speed;
+    
+    /*CAN BE CHANGED*/
+    public int FoodCount => _foodCount;
+
+    public Food Food;
+    public Transform Target;
+    public FoodAgentTree Mate;
 
 
-        var mat = GetComponent<MeshRenderer>().material;
-        switch (c)
-        {
-            case < 0.3f:
-                mat.color = Color.red;
-                _colorIndex = 0;
-                break;
-            case < 0.6f:
-                mat.color = Color.yellow;
-                _colorIndex = 1;
-                break;
-            default:
-                mat.color = Color.green;
-                _colorIndex = 2;
-                break;
-        }
-        
-        OnAgentSpawn?.Invoke(1, _colorIndex);
-    }
+    private float _hungerDecreaseRate;
+    private float _thirstDecreaseRate;
 
-    private IEnumerator Death()
-    {
-        for (var j = 0; j < 2; j++)
-        {
-            yield return new WaitForSeconds(5f);
-            var i = (int)GetData("foodCount");
-            if (i <= 0) continue;
-            SetData("foodCount", i - 1);
-            StartCoroutine(Death());
-            yield break;
-        }
-        
-        OnAgentSpawn?.Invoke(-1, _colorIndex);
-        Destroy(gameObject);
-    }
+    private int _ticksSinceLastMeal;
+    private int _ticksSinceLastDrink;
+    
 
     private void Update()
     {
         OnTick();
+    }
+
+    protected override void OnTick()
+    {
+        IncreaseHunger();
+        IncreaseThirst();
+        CheckCanSurvive();
+        
+        base.OnTick();
     }
 
     protected override Node SetupTree()
@@ -67,7 +50,7 @@ public class FoodAgentTree : BTree
             new Selector(this, new List<Node>
             {
                 //WAIT FOR A MATE
-                new CheckWaitingForMate(this)
+                new TaskWaitMate(this)
                 ,//REPRODUCE
                 new Sequence(this, new List<Node>
                 {
@@ -100,29 +83,46 @@ public class FoodAgentTree : BTree
                 new TaskWander(this)
             });
         
-        SetData("speed", 2f);
-        SetData("foodCount", 0);
-        
-        
-        
         return node;
+    }
+    
+    
+    private void IncreaseHunger()
+    {
+    }
+    
+    private void IncreaseThirst()
+    {
+        
+    }
+
+    private void CheckCanSurvive()
+    {
+        
     }
     
     public bool RequestMate(FoodAgentTree male)
     {
         if (new CheckReadyToReproduce(this).Evaluate() != NodeState.SUCCESS) return false;
-        if ((Object)GetData("mate") != null) return false;
+        /*if ((Object)GetData("mate") != null) return false;
         
         SetData("mate", male);
-        SetData("target", transform);
+        SetData("target", transform);*/
         
         return true;
     }
-    public void Impregnate()
+    public void Reproduced()
     {
-        ClearData("mate");
-        ClearData("target");
-        SetData("foodCount", (int)GetData("foodCount") - 2);
-        
+        Mate = null;
+        Target = null;
+        _foodCount -= 2;
+    }
+
+
+    public void IncreaseFoodCount() => _foodCount++;
+
+    public void Init(float speed)
+    {
+        _speed = speed;
     }
 }

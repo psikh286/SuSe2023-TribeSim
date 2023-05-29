@@ -1,11 +1,10 @@
 ﻿using BehaviorTree;
-using UnityEngine;
 
 public class CheckFoodInFOVRange : Node
 {
     private readonly IFoodFinder _finder;
     
-    public CheckFoodInFOVRange(BTree root)
+    public CheckFoodInFOVRange(FoodAgentTree root)
     {
         _root = root;
         _finder = root.GetComponent<IFoodFinder>();
@@ -13,7 +12,7 @@ public class CheckFoodInFOVRange : Node
     
     public override NodeState Evaluate()
     {
-        var f = (Object)_root.GetData("food");
+        var f = _root.Food;
         if (f != null)
         {
             _state = NodeState.SUCCESS;
@@ -28,8 +27,9 @@ public class CheckFoodInFOVRange : Node
             return _state;
         }
 
-        _root.SetData("food", food);
-        _root.SetData("target", food.Transform);
+        _root.Food = (Food)food;
+        _root.Target = food.Transform;
+        
         _state = NodeState.SUCCESS;
         return _state;
     }

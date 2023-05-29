@@ -2,17 +2,11 @@
 
 public class PrefabSpawner : MonoBehaviour
 {
-    [SerializeField] private SettingsSO _s;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Vector3 _bounds;
     [SerializeField] private int _prefabsPerSpawn;
     [SerializeField] private float _delay = 2f;
     [SerializeField] private bool _autoSpawn;
-
-    private void Start()
-    {
-        _s.OnValidate();
-    }
 
 
     public void SpawnFood()

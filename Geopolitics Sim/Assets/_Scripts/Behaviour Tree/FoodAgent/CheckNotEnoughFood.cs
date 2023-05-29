@@ -2,16 +2,14 @@
 
 public class CheckNotEnoughFood : Node
 {
-    public CheckNotEnoughFood(BTree root)
+    public CheckNotEnoughFood(FoodAgentTree root)
     {
         _root = root;
     }
     
     public override NodeState Evaluate()
     {
-        var foodCount = (int)_root.GetData("foodCount");
-        
-        _state = foodCount < GlobalSettings.FoodToRep ? NodeState.SUCCESS : NodeState.FAILURE;
+        _state = _root.FoodCount < GlobalSettings.FoodToRep ? NodeState.SUCCESS : NodeState.FAILURE;
         
         return _state;
     }
