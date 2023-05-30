@@ -1,4 +1,6 @@
-﻿public interface IFoodFinder
+﻿using System;
+
+public interface IFoodFinder
 {
-    public IFood FindFood();
+    public IFood FindFood(Type type);
 }
