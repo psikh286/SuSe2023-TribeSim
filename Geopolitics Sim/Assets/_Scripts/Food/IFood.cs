@@ -3,5 +3,5 @@
 public interface IFood
 {
     public Transform Transform { get; }
-    public void EatFood();
+    public void Collect();
 }

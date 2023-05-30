@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Food : MonoBehaviour, IFood
+public class Water : MonoBehaviour, IFood
 {
     public Transform Transform { get; set; }
     public void Collect() => Destroy(gameObject);
