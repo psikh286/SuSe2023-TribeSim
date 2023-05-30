@@ -8,20 +8,28 @@ public class FoodAgentTree : BTree
     public static Action OnAgentSpawn;
     private int _colorIndex;
 
-
-    [SerializeField] private float _speed;
-    [SerializeField] private int _foodCount;
     
     /*INITIALIZE*/
-    public float Speed => _speed;
+    [field: SerializeField] public float Speed { get; private set; }
     
     /*CAN BE CHANGED*/
-    public int FoodCount => _foodCount;
+    [field: SerializeField] public float FoodCount { get; private set; }
+    [field: SerializeField] public float HungerRemaining { get; private set; }
+    
+    [field: SerializeField] public float WaterCount { get; private set; }
+    [field: SerializeField] public float WaterRemaining { get; private set; }
+    
+    [field: SerializeField] public float EnergyLevel { get; private set; }
+
+    public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
+
 
     public Food Food;
+    public Water Water;
     public Transform Target;
     public FoodAgentTree Mate;
 
+    
 
     private float _hungerDecreaseRate;
     private float _thirstDecreaseRate;
@@ -46,7 +54,7 @@ public class FoodAgentTree : BTree
 
     protected override Node SetupTree()
     {
-        var node = 
+        /*var node = 
             new Selector(this, new List<Node>
             {
                 //WAIT FOR A MATE
@@ -81,21 +89,118 @@ public class FoodAgentTree : BTree
                 })
                 , //WALK AROUND
                 new TaskWander(this)
+            });*/
+
+        var node = 
+            new Selector(this, new List<Node>
+            {
+                new Sequence(this, new List<Node>
+                {
+                    new CheckIsHungry(this),
+                    new CheckHasFood(this),
+                    new TaskEatFood(this)
+                }),
+                new Sequence(this, new List<Node>
+                {
+                    new CheckIsThirsty(this),
+                    new CheckHasWater(this),
+                    new TaskDrinkWater(this)
+                }),
+                new Sequence(this, new List<Node>
+                {
+                    new CheckNoEnergy(this),
+                    new TaskRest(this)
+                }),
+                new Sequence(this, new List<Node>
+                {
+                    new CheckIsDay(this),
+                    new Selector(this, new List<Node>
+                    {
+                        /*FOOD SECTION*/
+                        new Sequence(this, new List<Node>
+                        {
+                            new CheckNeedFood(this),
+                            new Selector(this, new List<Node>
+                            {
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckFoodNearby(this),
+                                    new CheckTargetNear(this),
+                                    new TaskCollectFood(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new Inverter(new CheckHasFoodTarget(this)),
+                                    new CheckRememberFoodSpawn(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckHasFoodTarget(this),
+                                    new TaskGoToTarget(this)
+                                })
+                            })
+                        }),
+                        
+                        /*WATER SECTION*/
+                        new Sequence(this, new List<Node>
+                        {
+                            new CheckNeedWater(this),
+                            new Selector(this, new List<Node>
+                            {
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckWaterNearby(this),
+                                    new CheckTargetNear(this),
+                                    new TaskCollectWater(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new Inverter(new CheckHasWaterTarget(this)),
+                                    new CheckRememberWaterSpawn(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckHasWaterTarget(this),
+                                    new TaskGoToTarget(this)
+                                })
+                            })
+                        })
+                    }),
+                    new TaskWander(this)
+                }),
+                
             });
-        
+
+  
         return node;
     }
+    
+    
+    
+
+
+    public void IncreaseFoodCount() => FoodCount++;
+    public void IncreaseWaterCount() => WaterCount++;
+    
+    public void EatFood() => HungerRemaining += GlobalSettings.FoodRegain;
+    public void DrinkWater() => WaterRemaining += GlobalSettings.WaterRegain;
+    public void Rest() => EnergyLevel += GlobalSettings.EnergyRegain;
+
+    public void Init(float speed)
+    {
+        Speed = speed;
+    }
+    
+    
     
     
     private void IncreaseHunger()
     {
     }
-    
     private void IncreaseThirst()
     {
         
     }
-
     private void CheckCanSurvive()
     {
         
@@ -115,14 +220,6 @@ public class FoodAgentTree : BTree
     {
         Mate = null;
         Target = null;
-        _foodCount -= 2;
-    }
-
-
-    public void IncreaseFoodCount() => _foodCount++;
-
-    public void Init(float speed)
-    {
-        _speed = speed;
+        FoodCount -= 2;
     }
 }
