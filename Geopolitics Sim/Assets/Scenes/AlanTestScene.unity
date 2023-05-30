@@ -2068,9 +2068,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf630a566fb4918a8bf19dfc1f671cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
-  _foodCount: 0
+  <Speed>k__BackingField: 0
+  <FoodCount>k__BackingField: 0
+  <HungerRemaining>k__BackingField: 0
+  <WaterCount>k__BackingField: 0
+  <WaterRemaining>k__BackingField: 0
+  <EnergyLevel>k__BackingField: 0
   Food: {fileID: 0}
+  Water: {fileID: 0}
   Target: {fileID: 0}
   Mate: {fileID: 0}
 --- !u!114 &1407813460
@@ -2515,9 +2520,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf630a566fb4918a8bf19dfc1f671cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
-  _foodCount: 0
+  <Speed>k__BackingField: 0
+  <FoodCount>k__BackingField: 0
+  <HungerRemaining>k__BackingField: 0
+  <WaterCount>k__BackingField: 0
+  <WaterRemaining>k__BackingField: 0
+  <EnergyLevel>k__BackingField: 0
   Food: {fileID: 0}
+  Water: {fileID: 0}
   Target: {fileID: 0}
   Mate: {fileID: 0}
 --- !u!136 &2136287026
