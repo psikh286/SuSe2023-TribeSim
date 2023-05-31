@@ -9,7 +9,7 @@ public class CheckIsThirsty : Node
     
     public override NodeState Evaluate()
     {
-        _state = _root.WaterRemaining <= GlobalSettings.IsThirstyPercent ? NodeState.SUCCESS : NodeState.FAILURE;
+        _state = _root.WaterRemaining <= GlobalSettings.IsThirstyThreshold ? NodeState.SUCCESS : NodeState.FAILURE;
         
         return _state;
     }
