@@ -63,11 +63,7 @@
 
 				o.Albedo = o.Albedo * (1-drawStrength) + (baseColour+textureColour) * drawStrength;
 			}
-
-		
 		}
-
-
 		ENDCG
 	}
 	FallBack "Diffuse"

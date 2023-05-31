@@ -15,7 +15,7 @@ public class TextureData : UpdatableData {
 
 	public void ApplyToMaterial(Material material) {
 		
-		material.SetInt ("layerCount", layers.Length);
+		material.SetInteger ("layerCount", layers.Length);
 		material.SetColorArray ("baseColours", layers.Select(x => x.tint).ToArray());
 		material.SetFloatArray ("baseStartHeights", layers.Select(x => x.startHeight).ToArray());
 		material.SetFloatArray ("baseBlends", layers.Select(x => x.blendStrength).ToArray());
