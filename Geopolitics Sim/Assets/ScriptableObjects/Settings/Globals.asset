@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Globals
   m_EditorClassIdentifier: 
   _foodToRep: 2
-  _foodToSurvive: 0
+  _foodRegain: 0
+  _isHungryThreshold: 0
+  _waterToRep: 0
+  _waterRegain: 0
+  _isThirstyThreshold: 0
+  _restPoint: 0
+  _restRegain: 0
+  _time: 0
+  _posMemory: 0
   _minSpeed: 2
   _maxSpeed: 5
   _mutationMultiplier: 0.4
