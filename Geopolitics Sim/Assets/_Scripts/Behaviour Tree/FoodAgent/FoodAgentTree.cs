@@ -83,7 +83,26 @@ public class FoodAgentTree : BTree
                         /*REPRODUCTION SECTION*/
                         new Sequence(this, new List<Node>
                         {
-                            
+                            new CheckReproductionCapability(this),
+                            new Selector(this, new List<Node>
+                            {
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckHasMateTarget(this),
+                                    new CheckTargetNear(this),
+                                    new TaskReproduce(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckHasMateTarget(this),
+                                    new TaskGoToTarget(this)
+                                }),
+                                new Sequence(this, new List<Node>
+                                {
+                                    new CheckMateNearby(this),
+                                    new TaskRequestMate(this)
+                                })
+                            })
                         }),
                         
                         /*FOOD SECTION*/
@@ -154,7 +173,7 @@ public class FoodAgentTree : BTree
     
     public void EatFood() => HungerRemaining += GlobalSettings.FoodRegain;
     public void DrinkWater() => WaterRemaining += GlobalSettings.WaterRegain;
-    public void Rest() => EnergyLevel += GlobalSettings.EnergyRegain;
+    public void Rest() => EnergyLevel += GlobalSettings.RestRegain;
 
     public void SetTarget(Transform target) => Target = target;
     public void SetFood(Food food) => Food = food;
@@ -163,6 +182,8 @@ public class FoodAgentTree : BTree
 
     public void Init(float speed)
     {
+        transform.name = "Agent";
+        
         Speed = speed;
     }
     
@@ -183,18 +204,19 @@ public class FoodAgentTree : BTree
     
     public bool RequestMate(FoodAgentTree male)
     {
-        if (new CheckReadyToReproduce(this).Evaluate() != NodeState.SUCCESS) return false;
-        /*if ((Object)GetData("mate") != null) return false;
-        
-        SetData("mate", male);
-        SetData("target", transform);*/
+        if (new CheckReproductionCapability(this).Evaluate() != NodeState.SUCCESS) return false;
+        if (Mate != null) return false;
+
+        Mate = male;
+        Target = male.transform;
         
         return true;
     }
-    public void Reproduced()
+    public void ReproductionCost()
     {
         Mate = null;
         Target = null;
-        FoodCount -= 2;
+        FoodCount -= GlobalSettings.FoodToRep;
+        WaterCount -= GlobalSettings.WaterToRep;
     }
 }
