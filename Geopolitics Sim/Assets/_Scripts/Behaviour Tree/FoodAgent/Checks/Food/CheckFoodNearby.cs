@@ -20,8 +20,8 @@ public class CheckFoodNearby : Node
             return _state;
         }
 
-        _root.Food = (Food)food;
-        _root.Target = food.Transform;
+        _root.SetFood((Food)food);
+        _root.SetTarget(food.Transform);
         
         _state = NodeState.SUCCESS;
         return _state;

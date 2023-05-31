@@ -21,16 +21,17 @@ public class FoodAgentTree : BTree
     
     [field: SerializeField] public float EnergyLevel { get; private set; }
 
-    public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
-
-
-    public Food Food;
-    public Water Water;
-    public Transform Target;
-    public FoodAgentTree Mate;
-
+    /*REFERENCES*/
+    [field: SerializeField] public Transform Target { get; private set; }
+    [field: SerializeField] public Food Food { get; private set; }
+    [field: SerializeField] public Water Water { get; private set; }
+    [field: SerializeField] public FoodAgentTree Mate { get; private set; }
     
-
+    
+    /*MEMORY*/
+    public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
+    
+    
     private float _hungerDecreaseRate;
     private float _thirstDecreaseRate;
 
@@ -54,43 +55,6 @@ public class FoodAgentTree : BTree
 
     protected override Node SetupTree()
     {
-        /*var node = 
-            new Selector(this, new List<Node>
-            {
-                //WAIT FOR A MATE
-                new TaskWaitMate(this)
-                ,//REPRODUCE
-                new Sequence(this, new List<Node>
-                {
-                    new CheckReadyToReproduce(this),
-                    new CheckMateInDoRange(this),
-                    new TaskReproduce(this)
-                })
-                ,//WALK TO MATE
-                new Sequence(this, new List<Node>
-                {
-                    new CheckReadyToReproduce(this),
-                    new CheckMateInFOVRange(this),
-                    new TaskGoToTarget(this)
-                })
-                ,//EAT FOOD
-                new Sequence(this, new List<Node>
-                {
-                    new CheckNotEnoughFood(this),
-                    new CheckFoodInEatingRange(this),
-                    new TaskEatFood(this)
-                })
-               , //WALK TO FOOD
-                new Sequence(this, new List<Node>
-                {
-                    new CheckNotEnoughFood(this),
-                    new CheckFoodInFOVRange(this),
-                    new TaskGoToTarget(this)
-                })
-                , //WALK AROUND
-                new TaskWander(this)
-            });*/
-
         var node = 
             new Selector(this, new List<Node>
             {
@@ -116,6 +80,12 @@ public class FoodAgentTree : BTree
                     new CheckIsDay(this),
                     new Selector(this, new List<Node>
                     {
+                        /*REPRODUCTION SECTION*/
+                        new Sequence(this, new List<Node>
+                        {
+                            
+                        }),
+                        
                         /*FOOD SECTION*/
                         new Sequence(this, new List<Node>
                         {
@@ -185,6 +155,11 @@ public class FoodAgentTree : BTree
     public void EatFood() => HungerRemaining += GlobalSettings.FoodRegain;
     public void DrinkWater() => WaterRemaining += GlobalSettings.WaterRegain;
     public void Rest() => EnergyLevel += GlobalSettings.EnergyRegain;
+
+    public void SetTarget(Transform target) => Target = target;
+    public void SetFood(Food food) => Food = food;
+    public void SetWater(Water water) => Water = water;
+    public void SetMate(FoodAgentTree mate) => Mate = mate;
 
     public void Init(float speed)
     {

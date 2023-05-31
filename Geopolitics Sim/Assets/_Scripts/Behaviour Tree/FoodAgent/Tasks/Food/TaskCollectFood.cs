@@ -12,8 +12,8 @@ public class TaskCollectFood : Node
         _root.Food.Collect();
         _root.IncreaseWaterCount();
         
-        _root.Water = null;
-        _root.Target = null;
+        _root.SetFood(null);
+        _root.SetTarget(null);
         
         _state = NodeState.RUNNING;
         return _state;

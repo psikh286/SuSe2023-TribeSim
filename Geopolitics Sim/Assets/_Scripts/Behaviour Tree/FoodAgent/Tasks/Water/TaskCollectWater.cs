@@ -10,10 +10,10 @@ public class TaskCollectWater : Node
     public override NodeState Evaluate()
     {
         _root.Water.Collect();
-        _root.IncreaseFoodCount();
+        _root.IncreaseWaterCount();
         
-        _root.Food = null;
-        _root.Target = null;
+        _root.SetWater(null);
+        _root.SetTarget(null);
         
         _state = NodeState.RUNNING;
         return _state;

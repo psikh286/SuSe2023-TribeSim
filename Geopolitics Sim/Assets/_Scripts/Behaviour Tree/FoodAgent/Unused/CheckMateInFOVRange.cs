@@ -43,8 +43,8 @@ public class CheckMateInFOVRange : Node
             return _state;
         }
 
-        _root.Target = mate.transform;
-        _root.Mate = mate;
+        //_root.Target = mate.transform;
+        //_root.Mate = mate;
         
         _state = NodeState.SUCCESS;
         
