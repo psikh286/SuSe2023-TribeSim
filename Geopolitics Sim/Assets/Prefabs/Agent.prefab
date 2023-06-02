@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 3978980123119146063}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3978980123769897176
 RectTransform:
   m_ObjectHideFlags: 0
