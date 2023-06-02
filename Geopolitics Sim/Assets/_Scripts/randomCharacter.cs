@@ -32,7 +32,8 @@ public class randomCharacter : MonoBehaviour
 
         // Fetch the agent's MeshRenderer and assign a random color
         MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material.color = new Color(Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1));
+        Color color = new Color(Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1));
+        meshRenderer.material.SetColor("_BaseColor", color);
     }
 
 }
