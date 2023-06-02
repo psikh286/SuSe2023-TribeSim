@@ -36,4 +36,19 @@ public class randomCharacter : MonoBehaviour
         meshRenderer.material.SetColor("_BaseColor", color);
     }
 
+    public void Select()
+    {
+        // Show the agent's name
+        nameTMP.gameObject.SetActive(true);
+
+        // Perform other selection actions...
+    }
+
+    public void Deselect()
+    {
+        // Hide the agent's name
+        nameTMP.gameObject.SetActive(false);
+
+        // Perform other deselection actions...
+    }
 }
