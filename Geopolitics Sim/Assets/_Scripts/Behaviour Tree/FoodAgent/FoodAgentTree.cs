@@ -31,18 +31,12 @@ public class FoodAgentTree : BTree
     /*MEMORY*/
     public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
     
-    
+    /*DYNAMIC*/
     private float _hungerDecreaseRate;
     private float _thirstDecreaseRate;
+   
 
-    private int _ticksSinceLastMeal;
-    private int _ticksSinceLastDrink;
-    
-
-    private void Update()
-    {
-        OnTick();
-    }
+    private void Update() => OnTick();
 
     protected override void OnTick()
     {
@@ -153,9 +147,19 @@ public class FoodAgentTree : BTree
                                     new TaskGoToTarget(this)
                                 })
                             })
+                        }),
+                        
+                        /*EXPLORE SECTION*/
+                        new Selector(this, new List<Node>
+                        {
+                            new Sequence(this, new List<Node>
+                            {
+                                 new Inverter(new CheckTargetNear(this)),
+                                 new TaskGoToTarget(this)
+                            }),
+                            new TaskPickExploreTarget(this)
                         })
                     }),
-                    new TaskWander(this)
                 }),
                 
             });
@@ -164,22 +168,6 @@ public class FoodAgentTree : BTree
         return node;
     }
     
-    
-    
-
-
-    public void IncreaseFoodCount() => FoodCount++;
-    public void IncreaseWaterCount() => WaterCount++;
-    
-    public void EatFood() => HungerRemaining += GlobalSettings.FoodRegain;
-    public void DrinkWater() => WaterRemaining += GlobalSettings.WaterRegain;
-    public void Rest() => EnergyLevel += GlobalSettings.RestRegain;
-
-    public void SetTarget(Transform target) => Target = target;
-    public void SetFood(Food food) => Food = food;
-    public void SetWater(Water water) => Water = water;
-    public void SetMate(FoodAgentTree mate) => Mate = mate;
-
     public void Init(float speed)
     {
         transform.name = "Agent";
@@ -187,25 +175,23 @@ public class FoodAgentTree : BTree
         Speed = speed;
     }
     
-    
-    
-    
     private void IncreaseHunger()
     {
+        HungerRemaining -= _hungerDecreaseRate;
     }
     private void IncreaseThirst()
     {
-        
+        WaterRemaining -= _thirstDecreaseRate;
     }
     private void CheckCanSurvive()
-    {
-        
+    {  
+        if(HungerRemaining <= 0f || WaterRemaining <= 0f) Destroy(gameObject);
     }
     
     public bool RequestMate(FoodAgentTree male)
     {
-        if (new CheckReproductionCapability(this).Evaluate() != NodeState.SUCCESS) return false;
         if (Mate != null) return false;
+        if (new CheckReproductionCapability(this).Evaluate() != NodeState.SUCCESS) return false;
 
         Mate = male;
         Target = male.transform;
@@ -219,4 +205,21 @@ public class FoodAgentTree : BTree
         FoodCount -= GlobalSettings.FoodToRep;
         WaterCount -= GlobalSettings.WaterToRep;
     }
+    
+    #region Set Methods
+
+    public void IncreaseFoodCount() => FoodCount++;
+    public void IncreaseWaterCount() => WaterCount++;
+    
+    public void EatFood() => HungerRemaining += GlobalSettings.MinFoodRegain;
+    public void DrinkWater() => WaterRemaining += GlobalSettings.MinWaterRegain;
+    public void Rest() => EnergyLevel += GlobalSettings.RestRegain;
+
+    public void SetTarget(Transform target) => Target = target;
+    public void SetFood(Food food) => Food = food;
+    public void SetWater(Water water) => Water = water;
+    public void SetMate(FoodAgentTree mate) => Mate = mate;
+
+    #endregion
 }
+
