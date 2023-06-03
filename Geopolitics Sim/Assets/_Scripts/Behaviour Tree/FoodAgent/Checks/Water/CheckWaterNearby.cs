@@ -12,16 +12,16 @@ public class CheckWaterNearby : Node
     
     public override NodeState Evaluate()
     {
-        var food = _finder.FindFood(typeof(Water));
+        var water = _finder.FindFood(typeof(Water));
 
-        if (food == null)
+        if (water == null)
         {
             _state = NodeState.FAILURE;
             return _state;
         }
 
-        _root.SetWater((Water)food);
-        _root.SetTarget(food.Transform);
+        _root.SetWater((Water)water);
+        _root.SetTarget(water.Transform);
         
         _state = NodeState.SUCCESS;
         return _state;
