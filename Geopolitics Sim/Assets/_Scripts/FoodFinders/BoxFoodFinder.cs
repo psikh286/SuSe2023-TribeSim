@@ -14,9 +14,10 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
 
         if (i <= 0) return null;
         
-        
         var col = GetClosestCollider();
 
+        if (col == null) return null;
+        
         return col.TryGetComponent<IFood>(out var food) ? food : null;
         
         Collider GetClosestCollider()

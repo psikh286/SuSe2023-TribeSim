@@ -17,4 +17,8 @@ public static class Utility
     {
         return (float)_random.NextDouble() * (maxValue - minValue) + minValue;
     }
+    
+    public static float Map (float value, float inputFrom, float inputTo, float outputFrom, float outputTo) {
+        return (value - inputFrom) / (inputTo - inputFrom) * (outputTo - outputFrom) + outputFrom;
+    }
 }

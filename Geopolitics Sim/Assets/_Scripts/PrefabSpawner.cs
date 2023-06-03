@@ -16,7 +16,8 @@ public class PrefabSpawner : MonoBehaviour
             var x = _bounds.x * 0.5f;
             var z = _bounds.z * 0.5f;
             var pos = new Vector3(Utility.RandomFloat(-x, x), 0.5f, Utility.RandomFloat(-z, z));
-            Instantiate(_prefab, transform.position + pos, Quaternion.identity, transform);
+            var transform1 = transform;
+            Instantiate(_prefab, transform1.position + pos, Quaternion.identity, transform1);
         }
     }
 
