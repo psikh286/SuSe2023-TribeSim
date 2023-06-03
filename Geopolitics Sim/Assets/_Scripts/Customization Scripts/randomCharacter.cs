@@ -6,20 +6,27 @@ using TMPro;
 public class randomCharacter : MonoBehaviour
 {
     public TextMeshPro nameTMP;
+    private MeshRenderer meshRenderer;
+    private Color defaultOutline;
 
     public string[] firstNames = new string[]
-   {
-        "John", "Jane", "Bob", "Alice", "Tom", "Emily", "Jack", "Sarah", "James", "Emma",
-        "Robert", "Olivia", "Michael", "Ava", "William", "Isabella", "David", "Sophia", "Joseph", "Mia",
-        "Charles", "Charlotte", "Thomas", "Amelia", "Henry", "Harper", "George", "Evelyn", "Richard", "Abigail"
-   };
+{
+    "Liam", "Noah", "Oliver", "Elijah", "Lucas", "Mason", "Logan", "Mateo", "Muhammad", "Aarav",
+    "Arjun", "Sai", "Yusuf", "Ahmed", "Ali", "Chen", "Li", "Zhang", "Wang", "Liu",
+    "Carlos", "Jose", "Miguel", "Juan", "Alejandro", "Sofia", "Isabella", "Valentina", "Camila", "Valeria",
+    "Fatima", "Zainab", "Maria", "Aisha", "Khadija", "Sakura", "Hana", "Yui", "Rio", "Mei",
+    "Johannes", "Luca", "Finn", "Max", "Paul", "Mohamed", "Adam", "Rayan", "Amine", "Nasser"
+};
 
     public string[] lastNames = new string[]
     {
-        "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Rodriguez", "Wilson",
-        "Martinez", "Anderson", "Taylor", "Thomas", "Hernandez", "Moore", "Martin", "Jackson", "Thompson", "White",
-        "Lopez", "Lee", "Gonzalez", "Harris", "Clark", "Lewis", "Robinson", "Walker", "Perez", "Hall"
+    "Smith", "Johnson", "Brown", "Taylor", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez",
+    "Gonzalez", "Perez", "Sanchez", "Rivera", "Torres", "Nguyen", "Tran", "Pham", "Huynh", "Hoang",
+    "Li", "Wang", "Zhang", "Liu", "Chen", "Yang", "Huang", "Zhao", "Wu", "Zhou",
+    "Silva", "Santos", "Ferreira", "Pereira", "Oliveira", "Costa", "Rodrigues", "Martins", "Jesus", "Souza",
+    "Patel", "Singh", "Shah", "Kumar", "Desai", "Khan", "Ali", "Hussain", "Ahmed", "Begum"
     };
+
 
     private void Start()
     {
@@ -31,16 +38,18 @@ public class randomCharacter : MonoBehaviour
         nameTMP.text = name;
 
         // Fetch the agent's MeshRenderer and assign a random color
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         Color color = new Color(Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1));
         meshRenderer.material.SetColor("_BaseColor", color);
+        defaultOutline = meshRenderer.material.GetColor("_OutlineColor");
     }
 
     public void Select()
     {
         // Show the agent's name
         nameTMP.gameObject.SetActive(true);
-
+        meshRenderer.material.SetColor("_OutlineColor", Color.white);
+        meshRenderer.material.SetColor("_RimColor", Color.black);
         // Perform other selection actions...
     }
 
@@ -48,6 +57,8 @@ public class randomCharacter : MonoBehaviour
     {
         // Hide the agent's name
         nameTMP.gameObject.SetActive(false);
+        meshRenderer.material.SetColor("_OutlineColor", defaultOutline);
+        meshRenderer.material.SetColor("_RimColor", Color.white);
 
         // Perform other deselection actions...
     }

@@ -33,7 +33,6 @@ public class AgentSelector : MonoBehaviour
 
                     // Select the new agent
                     selectedAgent = hit.transform.gameObject;
-                    Debug.Log(selectedAgent.name);
                     selectedAgent.GetComponent<randomCharacter>().Select();
 
                     // Update the UI
