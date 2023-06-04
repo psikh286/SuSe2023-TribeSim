@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class AgentSelector : MonoBehaviour
 {
-    private GameObject selectedAgent; // The currently selected agent
+    [HideInInspector]
+    public GameObject selectedAgent; // The currently selected agent
 
     private void Update()
     {
@@ -16,10 +17,6 @@ public class AgentSelector : MonoBehaviour
             // Perform the raycast
             if (Physics.Raycast(ray, out hit))
             {
-                if (selectedAgent != null)
-                {
-                    selectedAgent.GetComponent<randomCharacter>().Deselect();
-                }
                 // Check if an agent was clicked
                 if (hit.transform.CompareTag("Agent"))
                 {
@@ -35,5 +32,10 @@ public class AgentSelector : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TriggerDeselect()
+    {
+        selectedAgent.GetComponent<randomCharacter>().Deselect();
     }
 }
