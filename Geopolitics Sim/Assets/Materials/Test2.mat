@@ -112,11 +112,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_4C3F5EE4: 3
-    - Vector1_5857EFB5: 30
-    - Vector1_65D18AD4: 50
-    - Vector1_6F228B9F: 10
-    - Vector1_A956083A: 60
+    - Vector1_4C3F5EE4: 1
+    - Vector1_5857EFB5: 15
+    - Vector1_65D18AD4: 20
+    - Vector1_6F228B9F: 5
+    - Vector1_A956083A: 31.6
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
