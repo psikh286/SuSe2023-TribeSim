@@ -15,6 +15,8 @@ public class BoxMateFinder : MonoBehaviour, IMateFinder
         
         var col = GetClosestCollider();
 
+        if (col == null) return null;
+
         return col.TryGetComponent<FoodAgentTree>(out var mate) ? mate : null;
         
         Collider GetClosestCollider()
@@ -25,6 +27,8 @@ public class BoxMateFinder : MonoBehaviour, IMateFinder
 
             for (var j = 0; j < i; j++)
             {
+                if(hitColliders[j].transform.position == transform.position) continue;
+                
                 var distance = Vector3.Distance(pos, hitColliders[j].transform.position);
 
                 if (distance > bestDistance) continue;

@@ -41,8 +41,8 @@ public class FoodAgentTree : BTree
     private float _hungerDecreaseRate = 0.05f;
     private float _thirstDecreaseRate= 0.05f;
 
-    public int Cooldown;
-   
+    public int Cooldown = 600;
+
 
     private void FixedUpdate() => OnTick();
 
@@ -106,7 +106,7 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
-                                    new CheckHasMateTarget(this),
+                                    new Inverter(new CheckHasMateTarget(this)),
                                     new CheckMateNearby(this),
                                     new TaskRequestMate(this)
                                 })

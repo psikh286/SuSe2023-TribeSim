@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using BehaviorTree;
+﻿using BehaviorTree;
 
 public class CheckReproductionCapability : Node
 {

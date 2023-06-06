@@ -15,5 +15,5 @@ MonoBehaviour:
   _energyCollectingFood: 8
   _energyCollectingWater: 8
   _energyWalk: 3
-  _energyReproduce: 40
-  _energyRequestMate: 15
+  _energyReproduce: 20
+  _energyRequestMate: 10

@@ -108,6 +108,9 @@ GameObject:
   - component: {fileID: 3978980122814440658}
   - component: {fileID: 8510085975691287660}
   - component: {fileID: 8860413388001572090}
+  - component: {fileID: 2795991057451847411}
+  - component: {fileID: 269363065964934851}
+  - component: {fileID: 4775258338831754560}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -163,6 +166,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bobbingSpeed: 0.05
   bobbingAmount: 0.15
+--- !u!114 &2795991057451847411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978980122814440659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf630a566fb4918a8bf19dfc1f671cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Speed>k__BackingField: 3
+  <FoodValue>k__BackingField: 40
+  <HungerRemaining>k__BackingField: 100
+  <WaterValue>k__BackingField: 40
+  <WaterRemaining>k__BackingField: 100
+  <EnergyLevel>k__BackingField: 100
+  <Target>k__BackingField: {fileID: 0}
+  <Food>k__BackingField: {fileID: 0}
+  <Water>k__BackingField: {fileID: 0}
+  <Mate>k__BackingField: {fileID: 0}
+  Cooldown: 0
+--- !u!114 &269363065964934851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978980122814440659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffff0db7cf422b8ae7bfcef270c8b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _halfSize: {x: 4, y: 1, z: 4}
+  _maxTargets: 2
+  _drawGizmos: 1
+--- !u!114 &4775258338831754560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978980122814440659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c729712d3314b86b06601265512d783, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _halfSize: {x: 4, y: 1, z: 4}
+  _maxTargets: 2
+  _drawGizmos: 0
 --- !u!1 &3978980123119146036
 GameObject:
   m_ObjectHideFlags: 0

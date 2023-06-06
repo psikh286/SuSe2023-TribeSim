@@ -13,7 +13,7 @@ public class TaskReproduce : Node
         var mate = _root.Mate;
         var speed = CalculateSpeed(_root.Speed, mate.Speed);
         
-        Object.Instantiate(_root, _root.transform.position, Quaternion.identity).Init(speed);
+        Object.Instantiate(_root, _root.transform.position + Vector3.right * 10f, Quaternion.identity).Init(speed);
 
         mate.ReproductionCost();
         _root.ReproductionCost();

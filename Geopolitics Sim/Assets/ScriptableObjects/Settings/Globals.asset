@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6086db4ac604123bc6c344f24d1b294, type: 3}
   m_Name: Globals
   m_EditorClassIdentifier: 
-  _foodToRep: 2
+  _foodToRep: 10
   _minFoodRegain: 20
   _maxFoodRegain: 30
   _isHungryThreshold: 80
-  _waterToRep: 2
+  _waterToRep: 10
   _minWaterRegain: 20
   _maxWaterRegain: 30
   _isThirstyThreshold: 80

@@ -21,9 +21,6 @@ public class TaskGoToTarget : Node
             _root.transform.LookAt(target);
             
             _root.transform.position = Vector3.MoveTowards(agentPosition, targetPosition, speed * Time.deltaTime);
-            
-            
-           
         }
         
         _root.NodeDebug = "TaskGoToTarget";
