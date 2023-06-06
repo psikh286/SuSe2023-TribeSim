@@ -11,6 +11,8 @@ public class TaskRest : Node
     {
         _root.Rest();
         
+        _root.NodeDebug = "TaskRest";
+        
         _state = NodeState.RUNNING;
         return _state;
     }

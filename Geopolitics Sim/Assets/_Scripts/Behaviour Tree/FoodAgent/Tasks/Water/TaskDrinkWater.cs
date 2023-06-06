@@ -11,6 +11,11 @@ public class TaskDrinkWater : Node
     {
         _root.DrinkWater();
         
+        _root.NodeDebug = "TaskDrinkWater";
+        
+        _root.SpendEnergy(EnergySettings.DrinkWater);
+        _root.SetCooldown(CooldownConfiguration.DrinkWater);
+        
         _state = NodeState.RUNNING;
         return _state;
     }

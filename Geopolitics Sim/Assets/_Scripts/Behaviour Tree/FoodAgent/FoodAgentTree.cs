@@ -6,17 +6,23 @@ using UnityEngine;
 public class FoodAgentTree : BTree
 {
     public static Action OnAgentSpawn;
-    private int _colorIndex;
+
+    private string _node;
+    public string NodeDebug
+    {
+        get => _node;
+        set => _node = value;
+    }
 
     
     /*INITIALIZE*/
     [field: SerializeField] public float Speed { get; private set; }
     
     /*CAN BE CHANGED*/
-    [field: SerializeField] public float FoodCount { get; private set; }
+    [field: SerializeField] public float FoodValue { get; private set; }
     [field: SerializeField] public float HungerRemaining { get; private set; }
     
-    [field: SerializeField] public float WaterCount { get; private set; }
+    [field: SerializeField] public float WaterValue { get; private set; }
     [field: SerializeField] public float WaterRemaining { get; private set; }
     
     [field: SerializeField] public float EnergyLevel { get; private set; }
@@ -32,17 +38,22 @@ public class FoodAgentTree : BTree
     public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
     
     /*DYNAMIC*/
-    private float _hungerDecreaseRate;
-    private float _thirstDecreaseRate;
+    private float _hungerDecreaseRate = 0.05f;
+    private float _thirstDecreaseRate= 0.05f;
+
+    public int Cooldown;
    
 
-    private void Update() => OnTick();
+    private void FixedUpdate() => OnTick();
 
     protected override void OnTick()
     {
         IncreaseHunger();
         IncreaseThirst();
         CheckCanSurvive();
+
+        Food = null;
+        Water = null;
         
         base.OnTick();
     }
@@ -52,6 +63,7 @@ public class FoodAgentTree : BTree
         var node = 
             new Selector(this, new List<Node>
             {
+                new CheckHasCooldown(this),
                 new Sequence(this, new List<Node>
                 {
                     new CheckIsHungry(this),
@@ -88,11 +100,13 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
+                                    new CheckHasTarget(this),
                                     new CheckHasMateTarget(this),
                                     new TaskGoToTarget(this)
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
+                                    new CheckHasMateTarget(this),
                                     new CheckMateNearby(this),
                                     new TaskRequestMate(this)
                                 })
@@ -118,6 +132,7 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
+                                    new CheckHasTarget(this),
                                     new CheckHasFoodTarget(this),
                                     new TaskGoToTarget(this)
                                 })
@@ -143,6 +158,7 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
+                                    new CheckHasTarget(this),
                                     new CheckHasWaterTarget(this),
                                     new TaskGoToTarget(this)
                                 })
@@ -155,6 +171,7 @@ public class FoodAgentTree : BTree
                             new Sequence(this, new List<Node>
                             {
                                  new Inverter(new CheckTargetNear(this)),
+                                 new CheckHasTarget(this),
                                  new TaskGoToTarget(this)
                             }),
                             new TaskPickExploreTarget(this)
@@ -184,8 +201,12 @@ public class FoodAgentTree : BTree
         WaterRemaining -= _thirstDecreaseRate;
     }
     private void CheckCanSurvive()
-    {  
-        if(HungerRemaining <= 0f || WaterRemaining <= 0f) Destroy(gameObject);
+    {
+        if (HungerRemaining <= 0f || WaterRemaining <= 0f)
+        {
+            print($"water: {WaterRemaining} , food: {HungerRemaining}");
+            Destroy(gameObject);
+        }
     }
     
     public bool RequestMate(FoodAgentTree male)
@@ -202,18 +223,47 @@ public class FoodAgentTree : BTree
     {
         Mate = null;
         Target = null;
-        FoodCount -= GlobalSettings.FoodToRep;
-        WaterCount -= GlobalSettings.WaterToRep;
+        FoodValue -= GlobalSettings.FoodToRep;
+        WaterValue -= GlobalSettings.WaterToRep;
     }
     
     #region Set Methods
 
-    public void IncreaseFoodCount() => FoodCount++;
-    public void IncreaseWaterCount() => WaterCount++;
-    
-    public void EatFood() => HungerRemaining += GlobalSettings.MinFoodRegain;
-    public void DrinkWater() => WaterRemaining += GlobalSettings.MinWaterRegain;
+    public void IncreaseFoodValue(float value)
+    {
+        FoodValue += value;
+        EnergyLevel += 6f;
+    }
+
+    public void IncreaseWaterCount(float value)
+    {
+        WaterValue += value;
+        
+        EnergyLevel += 4f;
+    }
+
+    public void EatFood()
+    {
+        var f = 100f - HungerRemaining;
+        
+        var value = FoodValue > f ? f : FoodValue;
+
+        HungerRemaining += value;
+        FoodValue -= value;
+    }
+    public void DrinkWater()
+    {
+        var f = 100f - WaterRemaining;
+        
+        var value = WaterValue > f ? f : WaterValue;
+
+        WaterRemaining += value;
+        WaterValue -= value;
+    }
+
     public void Rest() => EnergyLevel += GlobalSettings.RestRegain;
+    public void SpendEnergy(float value) => EnergyLevel -= value;
+    public void SetCooldown(int i) => Cooldown += i;
 
     public void SetTarget(Transform target) => Target = target;
     public void SetFood(Food food) => Food = food;
@@ -221,5 +271,14 @@ public class FoodAgentTree : BTree
     public void SetMate(FoodAgentTree mate) => Mate = mate;
 
     #endregion
+
+    private void OnDrawGizmos()
+    {
+        if(Target == null) return;
+        
+        Gizmos.color = Color.red;
+        
+        Gizmos.DrawSphere(Target.position, 0.6f);
+    }
 }
 

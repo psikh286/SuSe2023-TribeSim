@@ -10,10 +10,13 @@ public class TaskCollectFood : Node
     public override NodeState Evaluate()
     {
         _root.Food.Collect();
-        _root.IncreaseWaterCount();
+        _root.IncreaseFoodValue(_root.Food.GetFoodRegain());
         
         _root.SetFood(null);
         _root.SetTarget(null);
+        
+        _root.SpendEnergy(EnergySettings.CollectFood);
+        _root.SetCooldown(CooldownConfiguration.CollectFood);
         
         _state = NodeState.RUNNING;
         return _state;

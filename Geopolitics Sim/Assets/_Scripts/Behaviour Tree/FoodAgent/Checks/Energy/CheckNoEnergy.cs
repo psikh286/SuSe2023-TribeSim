@@ -11,6 +11,8 @@ public class CheckNoEnergy : Node
     {
         _state = _root.EnergyLevel <= GlobalSettings.EnergyRestPoint ? NodeState.SUCCESS : NodeState.FAILURE;
         
+        _root.NodeDebug = "CheckNoEnergy";
+        
         return _state;
     }
 }

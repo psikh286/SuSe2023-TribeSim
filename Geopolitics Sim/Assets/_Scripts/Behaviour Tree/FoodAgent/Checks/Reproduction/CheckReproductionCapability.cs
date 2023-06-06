@@ -1,4 +1,5 @@
-﻿using BehaviorTree;
+﻿using System.Linq;
+using BehaviorTree;
 
 public class CheckReproductionCapability : Node
 {
@@ -9,10 +10,11 @@ public class CheckReproductionCapability : Node
     
     public override NodeState Evaluate()
     {
-        _state = (_root.FoodCount >= GlobalSettings.FoodToRep) && (_root.WaterCount >= GlobalSettings.WaterToRep)
+        _state = (_root.FoodValue >= GlobalSettings.FoodToRep) && (_root.WaterValue >= GlobalSettings.WaterToRep)
             ? NodeState.SUCCESS
             : NodeState.FAILURE;
-        
+
+        _root.NodeDebug = "REPROD";
         return _state;
     }
 }

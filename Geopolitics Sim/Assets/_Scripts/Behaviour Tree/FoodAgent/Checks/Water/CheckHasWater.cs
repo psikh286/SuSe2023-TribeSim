@@ -9,7 +9,10 @@ public class CheckHasWater : Node
     
     public override NodeState Evaluate()
     {
-        _state = _root.WaterCount > 0 ? NodeState.SUCCESS : NodeState.FAILURE;
+        _state = _root.WaterValue > 0 ? NodeState.SUCCESS : NodeState.FAILURE;
+        
+        _root.NodeDebug = "CheckHasWater";
+
         
         return _state;
     }

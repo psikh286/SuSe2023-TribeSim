@@ -18,6 +18,11 @@ public class TaskReproduce : Node
         mate.ReproductionCost();
         _root.ReproductionCost();
         
+        _root.NodeDebug = "TaskReproduce";
+        
+        _root.SpendEnergy(EnergySettings.Reproduce);
+        _root.SetCooldown(CooldownConfiguration.Reproduce);
+        
         _state = NodeState.RUNNING;
         return _state;
     }

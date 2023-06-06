@@ -18,7 +18,16 @@ public class CheckTargetNear: Node
             return _state;
         }
 
-        _state = Vector3.Distance(_root.transform.position, target.position) > 0.01f ? NodeState.FAILURE : NodeState.SUCCESS;
+        if (Vector3.Distance(_root.transform.position, target.position) > 0.01f)
+        {
+            _state = NodeState.FAILURE;
+        }
+        else
+        {
+            _state = NodeState.SUCCESS;
+            
+            if(_root.Target.CompareTag("Target")) Object.Destroy(_root.Target.gameObject);
+        }
 
         return _state;
     }

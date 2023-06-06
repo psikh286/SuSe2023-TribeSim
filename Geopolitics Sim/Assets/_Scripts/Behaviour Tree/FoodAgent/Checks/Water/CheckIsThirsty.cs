@@ -11,6 +11,9 @@ public class CheckIsThirsty : Node
     {
         _state = _root.WaterRemaining <= GlobalSettings.IsThirstyThreshold ? NodeState.SUCCESS : NodeState.FAILURE;
         
+        _root.NodeDebug = "CheckIsThirsty";
+
+        
         return _state;
     }
 }

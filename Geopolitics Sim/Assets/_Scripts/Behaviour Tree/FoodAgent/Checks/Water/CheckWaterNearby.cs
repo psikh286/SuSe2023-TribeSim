@@ -1,4 +1,5 @@
 ﻿using BehaviorTree;
+using UnityEngine;
 
 public class CheckWaterNearby : Node
 {
@@ -19,6 +20,8 @@ public class CheckWaterNearby : Node
             _state = NodeState.FAILURE;
             return _state;
         }
+        
+        if(_root.Target != null && _root.Target.CompareTag("Target")) Object.Destroy(_root.Target.gameObject);
 
         _root.SetWater((Water)water);
         _root.SetTarget(water.Transform);

@@ -1,4 +1,5 @@
 ﻿using BehaviorTree;
+using UnityEngine;
 
 public class CheckFoodNearby : Node
 {
@@ -19,6 +20,8 @@ public class CheckFoodNearby : Node
             _state = NodeState.FAILURE;
             return _state;
         }
+        
+        if(_root.Target != null && _root.Target.CompareTag("Target")) Object.Destroy(_root.Target.gameObject);
 
         _root.SetFood((Food)food);
         _root.SetTarget(food.Transform);

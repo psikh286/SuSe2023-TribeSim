@@ -17,6 +17,11 @@ public class TaskRequestMate : Node
             _root.SetTarget(null);
         }
         
+        _root.NodeDebug = "TaskRequestMates";
+        
+        _root.SpendEnergy(EnergySettings.RequestMate);
+        _root.SetCooldown(CooldownConfiguration.RequestMate);
+        
         _state = NodeState.RUNNING;
         return _state;
     }

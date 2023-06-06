@@ -11,6 +11,11 @@ public class TaskEatFood : Node
     {
         _root.EatFood();
         
+        _root.NodeDebug = "TaskEatFood";
+        
+        _root.SpendEnergy(EnergySettings.EatFood);
+        _root.SetCooldown(CooldownConfiguration.EatFood);
+
         _state = NodeState.RUNNING;
         return _state;
     }
