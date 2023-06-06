@@ -4,13 +4,13 @@
 public class SettingsSO : ScriptableObject
 {
     [Header("Food")]
-    [SerializeField] [Tooltip("Food to reproduce")]private int _foodToRep;
+    [SerializeField] [Tooltip("Food to reproduce")]private float _foodToRep;
     [SerializeField] [Tooltip("Minimal amount of hunger restored by consuming one food item")] private float _minFoodRegain;
     [SerializeField] [Tooltip("Maximum amount of hunger restored by consuming one food item")] private float _maxFoodRegain;
     [SerializeField] [Tooltip("Hunger threshold for food consumption")] private float _isHungryThreshold;
     
     [Header("Water")]
-    [SerializeField] [Tooltip("Water to reproduce")]private int _waterToRep;
+    [SerializeField] [Tooltip("Water to reproduce")]private float _waterToRep;
     [SerializeField] [Tooltip("Minimal amount of thirstiness restored by consuming one water item")] private float _minWaterRegain;
     [SerializeField] [Tooltip("Maximum amount of thirstiness restored by consuming one water item")] private float _maxWaterRegain;
     [SerializeField] [Tooltip("Thirstiness threshold for water consumption")] private float _isThirstyThreshold;
@@ -29,6 +29,10 @@ public class SettingsSO : ScriptableObject
     [SerializeField] private float _minSpeed;
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _mutationMultiplier;
+
+    [Header("Exploration")] 
+    [SerializeField] private float _minExploreDistance;
+    [SerializeField] private float _maxExploreDistance;
 
     private void OnEnable()
     {
@@ -63,5 +67,9 @@ public class SettingsSO : ScriptableObject
         GlobalSettings.SetMinSpeed(_minSpeed);
         GlobalSettings.SetMaxSpeed(_maxSpeed);
         GlobalSettings.SetMutationMultiplier(_mutationMultiplier);
+        
+        /*EXPLORATION*/
+        GlobalSettings.SetMinExploreDistance(_minExploreDistance);
+        GlobalSettings.SetMaxExploreDistance(_maxExploreDistance);
     }
 }

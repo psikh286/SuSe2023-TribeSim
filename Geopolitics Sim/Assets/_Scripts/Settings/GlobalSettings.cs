@@ -25,8 +25,8 @@
     public static float MaxFoodRegain { get; private set; }
     public static void SetMaxFoodRegain(float f) => MaxFoodRegain = f;
     
-    public static int FoodToRep { get; private set; }
-    public static void SetFoodToRep(int i) => FoodToRep = i;
+    public static float FoodToRep { get; private set; }
+    public static void SetFoodToRep(float f) => FoodToRep = f;
     
     #endregion
 
@@ -41,8 +41,8 @@
     public static float MaxWaterRegain { get; private set; }
     public static void SetMaxWaterRegain(float f) => MaxWaterRegain = f;
     
-    public static int WaterToRep { get; private set; }
-    public static void SetWaterToRep(int i) => WaterToRep = i;
+    public static float WaterToRep { get; private set; }
+    public static void SetWaterToRep(float f) => WaterToRep = f;
 
     #endregion
 
@@ -69,5 +69,15 @@
     public static int MaxPositionMemory { get; private set; }
     public static void SetMaxPositionMemory(int i) => MaxPositionMemory = i;
 
+    #endregion
+
+    #region Exploration
+
+    public static float MinExploreDistance{ get; private set; }
+    public static void SetMinExploreDistance(float f) => MinExploreDistance = f;
+
+    public static float MaxExploreDistance { get; private set; }
+    public static void SetMaxExploreDistance(float f) => MaxExploreDistance = f;
+    
     #endregion
 }
