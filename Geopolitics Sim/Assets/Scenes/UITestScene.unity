@@ -397,6 +397,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1348535691240585113, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.775818
+      objectReference: {fileID: 0}
     - target: {fileID: 2905109888256328252, guid: 0c587d3c89569aa4db1aa88f9860fb90,
         type: 3}
       propertyPath: m_fontColor.b
