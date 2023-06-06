@@ -1,13 +1,20 @@
 using System.Collections;
+using OpenAI;
+using OpenAI.Chat;
+using OpenAI.Models;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Threading.Tasks;
 
 public class randomCharacter : MonoBehaviour
 {
     public TextMeshPro nameTMP;
     private MeshRenderer meshRenderer;
     private Color defaultOutline;
+
+    private string jobDescription;
+    private string thoughtDescription;
 
     public string[] firstNames = new string[]
 {
@@ -42,6 +49,12 @@ public class randomCharacter : MonoBehaviour
         Color color = new Color(Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1), Utility.RandomFloat(0, 1));
         meshRenderer.material.SetColor("_BaseColor", color);
         defaultOutline = meshRenderer.material.GetColor("_OutlineColor");
+
+        string jobPrompt = "Describe what an agent exploring the environment might be doing in less than 10 words.";
+        string thoughtPrompt = "Imagine what an agent might be thinking while exploring a new environment in less than 10 words.";
+        _ = generateJobDescriptionAsync(jobPrompt);
+        _ = generateThoughtDescriptionAsync(thoughtPrompt);
+
     }
 
     public void Select()
@@ -61,5 +74,48 @@ public class randomCharacter : MonoBehaviour
         meshRenderer.material.SetColor("_RimColor", Color.white);
 
         // Perform other deselection actions...
+    }
+
+    public async Task AICharacterAsync(string prompt)
+    {
+        var api = new OpenAIClient();
+        var messages = new List<Message>
+        {
+            new Message(Role.System, "You are an AI model trained to generate creative and contextually appropriate responses."),
+            new Message(Role.Assistant, "I'm here to help generate text for a game agent."),
+            new Message(Role.User, prompt),
+        };
+        var chatRequest = new ChatRequest(messages, Model.GPT3_5_Turbo);
+        var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+    }
+
+    public async Task generateJobDescriptionAsync(string prompt)
+    {
+        var api = new OpenAIClient();
+        var messages = new List<Message>
+        {
+            new Message(Role.System, "You are an AI model trained to generate creative and contextually appropriate responses."),
+            new Message(Role.Assistant, "I'm here to help generate text for a game agent."),
+            new Message(Role.User, prompt),
+        };
+        var chatRequest = new ChatRequest(messages, Model.GPT3_5_Turbo);
+        var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+        jobDescription = result;
+        Debug.Log(this.gameObject.name + " : " + jobDescription);
+    }
+    public async Task generateThoughtDescriptionAsync(string prompt)
+    {
+        var api = new OpenAIClient();
+        var messages = new List<Message>
+        {
+            new Message(Role.System, "You are an AI model trained to generate creative and contextually appropriate responses."),
+            new Message(Role.Assistant, "I'm here to help generate text for a game agent."),
+            new Message(Role.User, prompt),
+        };
+        var chatRequest = new ChatRequest(messages, Model.GPT3_5_Turbo);
+        var result = await api.ChatEndpoint.GetCompletionAsync(chatRequest);
+        thoughtDescription = result;
+        Debug.Log(this.gameObject.name + " : " + thoughtDescription);
+
     }
 }
