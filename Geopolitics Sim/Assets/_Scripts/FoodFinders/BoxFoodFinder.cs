@@ -25,13 +25,15 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
             var bestDistance = float.MaxValue;
             var pos = transform.position;
             Collider bestCollider = null;
-
+            
             for (var j = 0; j < i; j++)
             {
-                if (hitColliders[j].TryGetComponent<IFood>(out var f).GetType() != type) continue;
+                if (!hitColliders[j].TryGetComponent<IFood>(out var f)) continue;
+                if (f.GetType() != type) continue;
+                
                 var distance = Vector3.Distance(pos, hitColliders[j].transform.position);
 
-                if (distance > bestDistance) continue;
+                if (Math.Abs(distance) > bestDistance) continue;
                 
                 bestDistance = distance;
                 bestCollider = hitColliders[j];

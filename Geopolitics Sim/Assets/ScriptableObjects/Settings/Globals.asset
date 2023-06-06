@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: Globals
   m_EditorClassIdentifier: 
   _foodToRep: 2
-  _minFoodRegain: 10
-  _maxFoodRegain: 15
-  _isHungryThreshold: 70
-  _waterToRep: 0
-  _minWaterRegain: 0
-  _maxWaterRegain: 0
-  _isThirstyThreshold: 0
-  _restPoint: 0
-  _restRegain: 0
+  _minFoodRegain: 20
+  _maxFoodRegain: 30
+  _isHungryThreshold: 80
+  _waterToRep: 2
+  _minWaterRegain: 20
+  _maxWaterRegain: 30
+  _isThirstyThreshold: 80
+  _restPoint: 10
+  _restRegain: 1
   _time: 0
-  _posMemory: 0
+  _posMemory: 1
   _minSpeed: 2
   _maxSpeed: 5
   _mutationMultiplier: 0.4
+  _minExploreDistance: 2
+  _maxExploreDistance: 5
