@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class CameraController : MonoBehaviour
 
     private bool isFollowing; // Whether the camera is currently following an agent
 
+    public float restartTimer = 60f;
+
+    private void Start()
+    {
+        StartCoroutine(restartGame());
+    }
     private void Update()
     {
         // If an agent is selected and the camera is following, move towards the agent
@@ -73,5 +80,11 @@ public class CameraController : MonoBehaviour
         // Set the final position and rotation
         transform.position = targetPosition;
         transform.rotation = targetRotation;
+    }
+
+    IEnumerator restartGame()
+    {
+        yield return new WaitForSeconds(restartTimer);
+        SceneManager.LoadScene(1);
     }
 }

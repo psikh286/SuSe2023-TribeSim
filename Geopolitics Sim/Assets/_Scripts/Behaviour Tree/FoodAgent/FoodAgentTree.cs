@@ -38,8 +38,8 @@ public class FoodAgentTree : BTree
     public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
     
     /*DYNAMIC*/
-    private float _hungerDecreaseRate = 0.05f;
-    private float _thirstDecreaseRate= 0.05f;
+    private float _hungerDecreaseRate = 0.005f;
+    private float _thirstDecreaseRate= 0.005f;
 
     public int Cooldown = 600;
 
