@@ -400,7 +400,44 @@ PrefabInstance:
     - target: {fileID: 1348535691240585113, guid: 0c587d3c89569aa4db1aa88f9860fb90,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 12.775818
+      value: 12.775879
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109887746939529, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109887746939529, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e65da550b5b6fcb4c9ebb94ea510d53b,
+        type: 2}
+    - target: {fileID: 2905109887746939529, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109887746939529, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3929200400244213417, guid: e65da550b5b6fcb4c9ebb94ea510d53b,
+        type: 2}
+    - target: {fileID: 2905109887746939529, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888140874262, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888187477738, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2905109888256328252, guid: 0c587d3c89569aa4db1aa88f9860fb90,
         type: 3}
@@ -421,6 +458,33 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4279061168
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888335322754, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888335322754, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: e65da550b5b6fcb4c9ebb94ea510d53b,
+        type: 2}
+    - target: {fileID: 2905109888335322754, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888335322754, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3929200400244213417, guid: e65da550b5b6fcb4c9ebb94ea510d53b,
+        type: 2}
+    - target: {fileID: 2905109888335322754, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2905109888479852609, guid: 0c587d3c89569aa4db1aa88f9860fb90,
         type: 3}
@@ -466,6 +530,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109888812233768, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2905109888812233772, guid: 0c587d3c89569aa4db1aa88f9860fb90,
         type: 3}
@@ -591,6 +660,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4289743373
+      objectReference: {fileID: 0}
+    - target: {fileID: 2905109889148138918, guid: 0c587d3c89569aa4db1aa88f9860fb90,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c587d3c89569aa4db1aa88f9860fb90, type: 3}
