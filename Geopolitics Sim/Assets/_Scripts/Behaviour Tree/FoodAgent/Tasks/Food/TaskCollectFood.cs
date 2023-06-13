@@ -9,6 +9,8 @@ public class TaskCollectFood : Node
 
     public override NodeState Evaluate()
     {
+        _root.RememberPosition("Food", _root.Food.transform.position);
+        
         _root.Food.Collect();
         _root.IncreaseFoodValue(_root.Food.GetFoodRegain());
         
