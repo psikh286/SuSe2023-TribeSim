@@ -8,7 +8,7 @@ public class TaskGoToTarget : Node
     public TaskGoToTarget(FoodAgentTree root)
     {
         _root = root;
-        _tickFreq = root.TickFrequency;
+        _tickFreq = FoodAgentTree.TickFrequency;
     }
 
     public override NodeState Evaluate()
