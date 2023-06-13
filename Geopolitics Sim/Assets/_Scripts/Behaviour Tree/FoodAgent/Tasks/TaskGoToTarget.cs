@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class TaskGoToTarget : Node
 {
+    private readonly float _tickFreq;
+    
     public TaskGoToTarget(FoodAgentTree root)
     {
         _root = root;
+        _tickFreq = root.TickFrequency;
     }
 
     public override NodeState Evaluate()
@@ -20,7 +23,7 @@ public class TaskGoToTarget : Node
             
             _root.transform.LookAt(target);
             
-            _root.transform.position = Vector3.MoveTowards(agentPosition, targetPosition, speed * Time.deltaTime);
+            _root.transform.position = Vector3.MoveTowards(agentPosition, targetPosition, speed * _tickFreq);
         }
         
         _root.NodeDebug = "TaskGoToTarget";

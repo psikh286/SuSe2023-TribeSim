@@ -7,12 +7,9 @@ public class FoodAgentTree : BTree
 {
     public static Action OnAgentSpawn;
 
-    private string _node;
-    public string NodeDebug
-    {
-        get => _node;
-        set => _node = value;
-    }
+    public string NodeDebug;
+
+    public float TickFrequency = 0.02f;
 
     
     /*INITIALIZE*/
@@ -87,7 +84,7 @@ public class FoodAgentTree : BTree
                     new Selector(this, new List<Node>
                     {
                         /*REPRODUCTION SECTION*/
-                        new Sequence(this, new List<Node>
+                        /*new Sequence(this, new List<Node>
                         {
                             new CheckReproductionCapability(this),
                             new Selector(this, new List<Node>
@@ -111,7 +108,7 @@ public class FoodAgentTree : BTree
                                     new TaskRequestMate(this)
                                 })
                             })
-                        }),
+                        }),*/
                         
                         /*FOOD SECTION*/
                         new Sequence(this, new List<Node>

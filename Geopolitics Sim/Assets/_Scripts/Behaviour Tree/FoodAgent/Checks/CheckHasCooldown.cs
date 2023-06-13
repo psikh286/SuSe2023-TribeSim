@@ -12,6 +12,7 @@ public class CheckHasCooldown : Node
         if (_root.Cooldown > 0)
         {
             _state = NodeState.SUCCESS;
+            _root.NodeDebug = "Cooldown";
             _root.Cooldown--;
         }
         else
