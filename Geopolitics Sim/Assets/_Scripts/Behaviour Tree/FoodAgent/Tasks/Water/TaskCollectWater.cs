@@ -9,6 +9,8 @@ public class TaskCollectWater : Node
 
     public override NodeState Evaluate()
     {
+        _root.RememberPosition("Water", _root.Water.transform.position);
+        
         _root.Water.Collect();
         _root.IncreaseWaterCount(_root.Water.GetFoodRegain());
         

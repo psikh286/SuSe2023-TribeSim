@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BehaviorTree;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class FoodAgentTree : BTree
 
     public string NodeDebug;
 
-    public float TickFrequency = 0.02f;
+    public const float TickFrequency = 0.02f;
 
     
     /*INITIALIZE*/
@@ -32,11 +33,11 @@ public class FoodAgentTree : BTree
     
     
     /*MEMORY*/
-    public PositionMemory[] PositionMemory { get; } = new PositionMemory[GlobalSettings.MaxPositionMemory];
+    public List<PositionMemory> PositionMemories { get; } = new ();
     
     /*DYNAMIC*/
-    private float _hungerDecreaseRate = 0.005f;
-    private float _thirstDecreaseRate= 0.005f;
+    private float _hungerDecreaseRate = 0.01f;
+    private float _thirstDecreaseRate= 0.01f;
 
     public int Cooldown = 600;
 
@@ -51,6 +52,8 @@ public class FoodAgentTree : BTree
 
         Food = null;
         Water = null;
+        
+        if(Target != null && !Target.CompareTag("Target")) Target = null;
         
         base.OnTick();
     }
@@ -124,11 +127,6 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
-                                    new Inverter(new CheckHasFoodTarget(this)),
-                                    new CheckRememberFoodSpawn(this)
-                                }),
-                                new Sequence(this, new List<Node>
-                                {
                                     new CheckHasTarget(this),
                                     new CheckHasFoodTarget(this),
                                     new TaskGoToTarget(this)
@@ -150,15 +148,29 @@ public class FoodAgentTree : BTree
                                 }),
                                 new Sequence(this, new List<Node>
                                 {
-                                    new Inverter(new CheckHasWaterTarget(this)),
-                                    new CheckRememberWaterSpawn(this)
-                                }),
-                                new Sequence(this, new List<Node>
-                                {
                                     new CheckHasTarget(this),
                                     new CheckHasWaterTarget(this),
                                     new TaskGoToTarget(this)
                                 })
+                            })
+                        }),
+                        
+                        /*MEMORY SECTION*/
+                        new Selector(this, new List<Node>
+                        {
+                            new Sequence(this, new List<Node>
+                            {
+                                new CheckNeedWater(this),
+                                new Inverter(new CheckHasWaterTarget(this)),
+                                new CheckRememberPosition(this, "Water"),
+                                new TaskGoToTarget(this)
+                            }),
+                            new Sequence(this, new List<Node>
+                            {
+                                new CheckNeedFood(this),
+                                new Inverter(new CheckHasFoodTarget(this)),
+                                new CheckRememberPosition(this, "Food"),
+                                new TaskGoToTarget(this)
                             })
                         }),
                         
@@ -189,21 +201,11 @@ public class FoodAgentTree : BTree
         Speed = speed;
     }
     
-    private void IncreaseHunger()
-    {
-        HungerRemaining -= _hungerDecreaseRate;
-    }
-    private void IncreaseThirst()
-    {
-        WaterRemaining -= _thirstDecreaseRate;
-    }
+    private void IncreaseHunger() => HungerRemaining -= _hungerDecreaseRate;
+    private void IncreaseThirst() => WaterRemaining -= _thirstDecreaseRate;
     private void CheckCanSurvive()
     {
-        if (HungerRemaining <= 0f || WaterRemaining <= 0f)
-        {
-            print($"water: {WaterRemaining} , food: {HungerRemaining}");
-            Destroy(gameObject);
-        }
+        if (HungerRemaining <= 0f || WaterRemaining <= 0f) Destroy(gameObject);
     }
     
     public bool RequestMate(FoodAgentTree male)
@@ -222,6 +224,15 @@ public class FoodAgentTree : BTree
         Target = null;
         FoodValue -= GlobalSettings.FoodToRep;
         WaterValue -= GlobalSettings.WaterToRep;
+    }
+    
+    public void RememberPosition(string k, Vector3 v)
+    {
+        var mem = new PositionMemory(k, v);
+        
+        if (PositionMemories.Count >= GlobalSettings.MaxPositionMemory) PositionMemories.RemoveAt(0);
+
+        PositionMemories.Add(mem);
     }
     
     #region Set Methods
