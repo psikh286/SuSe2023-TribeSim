@@ -23,6 +23,7 @@ public class CheckRememberPosition : Node
         else
         {
             _root.SetTarget(target);
+            _root.OnAgentAct?.Invoke($"Going to already visited {_key} place");
             _state = NodeState.SUCCESS;
         }
 

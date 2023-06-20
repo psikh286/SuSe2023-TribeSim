@@ -9,8 +9,16 @@ public class CheckHasMateTarget : Node
     
     public override NodeState Evaluate()
     {
-        _state = _root.Mate == null ? NodeState.FAILURE : NodeState.SUCCESS;
-        
+        if (_root.Mate == null)
+        {
+            _state = NodeState.FAILURE;
+        }
+        else
+        {
+            _state = NodeState.SUCCESS;
+            _root.OnAgentAct?.Invoke("Going to Mate");
+        }
+
         return _state;
     }
 }

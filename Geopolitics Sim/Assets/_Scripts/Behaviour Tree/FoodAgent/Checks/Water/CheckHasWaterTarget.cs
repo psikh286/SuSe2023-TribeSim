@@ -9,8 +9,16 @@ public class CheckHasWaterTarget : Node
 
     public override NodeState Evaluate()
     {
-        _state = _root.Water == null ? NodeState.FAILURE : NodeState.SUCCESS;
-            
+        if (_root.Water == null)
+        {
+            _state = NodeState.FAILURE;
+        }
+        else
+        {
+            _state = NodeState.SUCCESS;
+            _root.OnAgentAct?.Invoke("Going to water source");
+        }
+
         return _state;
     }
 }

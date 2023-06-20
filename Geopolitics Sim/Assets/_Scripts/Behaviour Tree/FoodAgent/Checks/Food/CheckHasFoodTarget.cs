@@ -9,8 +9,14 @@ public class CheckHasFoodTarget : Node
 
     public override NodeState Evaluate()
     {
-        _state = _root.Food == null ? NodeState.FAILURE : NodeState.SUCCESS;
-            
+        if (_root.Food == null)
+            _state = NodeState.FAILURE;
+        else
+        {
+            _state = NodeState.SUCCESS;
+            _root.OnAgentAct?.Invoke("Going to Food");
+        }
+
         return _state;
     }
 }
