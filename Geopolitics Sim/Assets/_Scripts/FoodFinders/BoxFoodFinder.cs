@@ -35,7 +35,7 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
 
                 if (Math.Abs(distance) > bestDistance) continue;
                 
-                bestDistance = distance;
+                bestDistance = Math.Abs(distance);
                 bestCollider = hitColliders[j];
             }
  
