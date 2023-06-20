@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04325c6ba215417bb37341ae6a69eccf, type: 3}
   m_Name: EnergyConfig
   m_EditorClassIdentifier: 
-  _energyCollectingFood: 0
-  _energyCollectingWater: 0
-  _energyWalk: 0
-  _energyReproduce: 0
-  _energyRequestMate: 0
+  _energyCollectingFood: 10
+  _energyCollectingWater: 10
+  _energyWalk: 0.01
+  _energyReproduce: 40
+  _energyRequestMate: 15

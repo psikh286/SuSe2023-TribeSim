@@ -23,9 +23,9 @@ MonoBehaviour:
   _restPoint: 10
   _restRegain: 1
   _time: 0
-  _posMemory: 1
-  _minSpeed: 2
-  _maxSpeed: 5
-  _mutationMultiplier: 0.4
+  _posMemory: 3
+  _minSpeed: 0.03
+  _maxSpeed: 0.07
+  _mutationMultiplier: 0.01
   _minExploreDistance: 2
   _maxExploreDistance: 5
