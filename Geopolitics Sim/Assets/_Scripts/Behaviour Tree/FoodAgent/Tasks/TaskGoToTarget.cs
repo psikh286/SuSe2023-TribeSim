@@ -19,7 +19,7 @@ public class TaskGoToTarget : Node
         {
             var targetPosition = target.position;
             
-            _root.transform.LookAt(target);
+            //_root.transform.LookAt(target);
             
             _root.transform.position = Vector3.MoveTowards(agentPosition, targetPosition, speed);
             
