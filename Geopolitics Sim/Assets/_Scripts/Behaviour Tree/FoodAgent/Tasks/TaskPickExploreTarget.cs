@@ -3,12 +3,9 @@ using BehaviorTree;
 
 public class TaskPickExploreTarget : Node
 {
-    private Vector3 _targetPoint;
-    
     public TaskPickExploreTarget(FoodAgentTree root)
     {
         _root = root;
-        _targetPoint = _root.transform.position;
     }
     
     public override NodeState Evaluate()
@@ -25,8 +22,10 @@ public class TaskPickExploreTarget : Node
         Object.Destroy(r, 10f);
 
         _root.SetTarget(r.transform);
+        _root.SetCooldown((int)(CooldownConfiguration.PickExploreTarget * Utility.RandomFloat()));
         
         _root.NodeDebug = "TaskPickExploreTarget";
+        _root.OnAgentAct?.Invoke("Thinking where to go");
 
         _state = NodeState.RUNNING;
         return _state;

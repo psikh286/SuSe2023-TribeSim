@@ -18,6 +18,7 @@ public class TaskRequestMate : Node
         }
         
         _root.NodeDebug = "TaskRequestMates";
+        _root.OnAgentAct?.Invoke("Request Mating");
         
         _root.SpendEnergy(EnergySettings.RequestMate);
         _root.SetCooldown(CooldownConfiguration.RequestMate);

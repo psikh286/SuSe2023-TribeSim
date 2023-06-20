@@ -9,7 +9,7 @@ public class TaskCollectWater : Node
 
     public override NodeState Evaluate()
     {
-        _root.RememberPosition("Water", _root.Water.transform.position);
+        _root.MemorizePosition("Water", _root.Water.transform.position);
         
         _root.Water.Collect();
         _root.IncreaseWaterCount(_root.Water.GetFoodRegain());
@@ -21,6 +21,8 @@ public class TaskCollectWater : Node
         
         _root.SpendEnergy(EnergySettings.CollectWater);
         _root.SetCooldown(CooldownConfiguration.CollectWater);
+        
+        _root.OnAgentAct?.Invoke("Collecting Water");
         
         _state = NodeState.RUNNING;
         return _state;

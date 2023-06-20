@@ -12,6 +12,7 @@ public class TaskEatFood : Node
         _root.EatFood();
         
         _root.NodeDebug = "TaskEatFood";
+        _root.OnAgentAct?.Invoke("Eating Food");
         
         _root.SpendEnergy(EnergySettings.EatFood);
         _root.SetCooldown(CooldownConfiguration.EatFood);

@@ -9,7 +9,7 @@ public class TaskCollectFood : Node
 
     public override NodeState Evaluate()
     {
-        _root.RememberPosition("Food", _root.Food.transform.position);
+        _root.MemorizePosition("Food", _root.Food.transform.position);
         
         _root.Food.Collect();
         _root.IncreaseFoodValue(_root.Food.GetFoodRegain());
@@ -19,6 +19,8 @@ public class TaskCollectFood : Node
         
         _root.SpendEnergy(EnergySettings.CollectFood);
         _root.SetCooldown(CooldownConfiguration.CollectFood);
+        
+        _root.OnAgentAct?.Invoke("Collecting Food");
         
         _state = NodeState.RUNNING;
         return _state;
