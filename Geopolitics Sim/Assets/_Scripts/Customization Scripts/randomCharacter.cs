@@ -14,7 +14,7 @@ public class randomCharacter : MonoBehaviour
     private Color defaultOutline;
 
     private string jobDescription;
-    private string thoughtDescription;
+    public string thoughtDescription;
 
     public string[] firstNames = new string[]
 {
