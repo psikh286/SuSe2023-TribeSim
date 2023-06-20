@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using BehaviorTree;
 using UnityEngine;
 
 public class FoodAgentTree : BTree
 {
     public static Action OnAgentSpawn;
-
+    public Action<string> OnAgentAct;
     public string NodeDebug;
 
-    public const float TickFrequency = 0.02f;
-
-    
     /*INITIALIZE*/
     [field: SerializeField] public float Speed { get; private set; }
     
@@ -24,6 +20,9 @@ public class FoodAgentTree : BTree
     [field: SerializeField] public float WaterRemaining { get; private set; }
     
     [field: SerializeField] public float EnergyLevel { get; private set; }
+    
+    [field: SerializeField] public int Cooldown { get; private set; } = 600;
+    [field: SerializeField] public int ReproductionCooldown { get; private set; } = 200;
 
     /*REFERENCES*/
     [field: SerializeField] public Transform Target { get; private set; }
@@ -31,16 +30,17 @@ public class FoodAgentTree : BTree
     [field: SerializeField] public Water Water { get; private set; }
     [field: SerializeField] public FoodAgentTree Mate { get; private set; }
     
-    
     /*MEMORY*/
     public List<PositionMemory> PositionMemories { get; } = new ();
-    
+
     /*DYNAMIC*/
     private float _hungerDecreaseRate = 0.01f;
     private float _thirstDecreaseRate= 0.01f;
 
-    public int Cooldown = 600;
-
+    private void Start()
+    {
+        ReproductionCooldown = 200;
+    }
 
     private void FixedUpdate() => OnTick();
 
@@ -52,8 +52,9 @@ public class FoodAgentTree : BTree
 
         Food = null;
         Water = null;
-        
         if(Target != null && !Target.CompareTag("Target")) Target = null;
+
+        if(ReproductionCooldown > 0) ReproductionCooldown--;
         
         base.OnTick();
     }
@@ -87,7 +88,7 @@ public class FoodAgentTree : BTree
                     new Selector(this, new List<Node>
                     {
                         /*REPRODUCTION SECTION*/
-                        /*new Sequence(this, new List<Node>
+                        new Sequence(this, new List<Node>
                         {
                             new CheckReproductionCapability(this),
                             new Selector(this, new List<Node>
@@ -111,7 +112,7 @@ public class FoodAgentTree : BTree
                                     new TaskRequestMate(this)
                                 })
                             })
-                        }),*/
+                        }),
                         
                         /*FOOD SECTION*/
                         new Sequence(this, new List<Node>
@@ -181,6 +182,7 @@ public class FoodAgentTree : BTree
                             {
                                  new Inverter(new CheckTargetNear(this)),
                                  new CheckHasTarget(this),
+                                 new DebugNode(this, "Exploring!"),
                                  new TaskGoToTarget(this)
                             }),
                             new TaskPickExploreTarget(this)
@@ -210,8 +212,10 @@ public class FoodAgentTree : BTree
     
     public bool RequestMate(FoodAgentTree male)
     {
+        if (ReproductionCooldown > 0) return false;
         if (Mate != null) return false;
         if (new CheckReproductionCapability(this).Evaluate() != NodeState.SUCCESS) return false;
+        if (male == this) return false;
 
         Mate = male;
         Target = male.transform;
@@ -224,15 +228,18 @@ public class FoodAgentTree : BTree
         Target = null;
         FoodValue -= GlobalSettings.FoodToRep;
         WaterValue -= GlobalSettings.WaterToRep;
+
+        ReproductionCooldown = 200;
     }
     
-    public void RememberPosition(string k, Vector3 v)
+    public void MemorizePosition(string k, Vector3 v)
     {
-        var mem = new PositionMemory(k, v);
-        
-        if (PositionMemories.Count >= GlobalSettings.MaxPositionMemory) PositionMemories.RemoveAt(0);
+        var g = PositionMemories.FindAll(r => r.Key == k);
+        if (g.Count >= 2) PositionMemories.Remove(g[0]);
 
-        PositionMemories.Add(mem);
+        if (PositionMemories.Count >= GlobalSettings.MaxPositionMemory) PositionMemories.RemoveAt(0);
+        
+        PositionMemories.Add(new PositionMemory(k, v));
     }
     
     #region Set Methods
@@ -242,7 +249,6 @@ public class FoodAgentTree : BTree
         FoodValue += value;
         EnergyLevel += 6f;
     }
-
     public void IncreaseWaterCount(float value)
     {
         WaterValue += value;
