@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(restartGame());
+        //StartCoroutine(restartGame());
     }
     private void Update()
     {
