@@ -36,7 +36,7 @@ public class UIHandler : MonoBehaviour
             _selectedCharacter = agentObject.GetComponent<randomCharacter>();
 
             _name.text = _selectedCharacter.nameTMP.text;
-            _speed.text = $"{agent.Speed * 20f}";
+            _speed.text = $"{agent.Speed}";
 
             _selectedAgent = agent;
         }

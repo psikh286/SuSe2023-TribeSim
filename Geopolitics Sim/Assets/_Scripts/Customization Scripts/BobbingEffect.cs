@@ -13,7 +13,7 @@ public class BobbingEffect : MonoBehaviour
     private void Start()
     {
         // Store the default y position of the agent
-        defaultY = transform.position.y;
+        defaultY = transform.localPosition.y;
         bobbingSpeed = Utility.RandomFloat(0.01f, 0.05f);
         bobbingAmount = Utility.RandomFloat(0.1f, 0.2f);
     }
@@ -22,7 +22,7 @@ public class BobbingEffect : MonoBehaviour
     {
         // Calculate the new y position for the bobbing effect
         float newY = defaultY + Mathf.Sin(timer) * bobbingAmount;
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, newY, transform.localPosition.z);
 
         // Increase the timer by the bobbing speed
         timer += bobbingSpeed;
