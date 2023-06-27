@@ -31,8 +31,8 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3978980122814440658}
-  m_RootOrder: 1
+  m_Father: {fileID: 3978980123119146032}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3978980122655605782
 MeshFilter:
@@ -130,8 +130,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3978980123119146032}
-  - {fileID: 3978980122655605785}
-  - {fileID: 3978980124588190597}
   - {fileID: 3978980123769897176}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -238,7 +236,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3978980122655605785}
+  - {fileID: 3978980124588190597}
   m_Father: {fileID: 3978980122814440658}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTMP: {fileID: 3978980123769897175}
+  thoughtDescription: 
   firstNames:
   - John
   - Jane
@@ -427,7 +428,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3978980122814440658}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -611,8 +612,8 @@ Transform:
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 3978980122814440658}
-  m_RootOrder: 2
+  m_Father: {fileID: 3978980123119146032}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3978980124588190594
 MeshFilter:
