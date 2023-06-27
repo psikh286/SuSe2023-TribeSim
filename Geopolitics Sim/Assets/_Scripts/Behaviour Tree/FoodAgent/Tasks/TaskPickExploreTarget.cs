@@ -38,7 +38,19 @@ public class TaskPickExploreTarget : Node
         var angle = 2f * Mathf.PI * Utility.RandomFloat();
         
         result += new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * Utility.RandomFloat(GlobalSettings.MinExploreDistance, GlobalSettings.MaxExploreDistance);
-        
+
+        if (Physics.Raycast(result, Vector3.up, out var hit, Mathf.Infinity, 1 << 13))
+        {
+            result.y = hit.point.y + 0.5f;
+        }
+        else
+        {
+            if (Physics.Raycast(result, Vector3.down, out hit, Mathf.Infinity, 1 << 13))
+            {
+                result.y = hit.point.y ;
+            }
+        }
+
         return result;
     }
 }

@@ -7,6 +7,9 @@ public class PrefabSpawner : MonoBehaviour
     [SerializeField] private int _prefabsPerSpawn;
     [SerializeField] private float _delay = 2f;
     [SerializeField] private bool _autoSpawn;
+    [SerializeField] private Color _gizmoColor = Color.red;
+
+    private void Start() => SpawnFood();
 
 
     public void SpawnFood()
@@ -16,8 +19,18 @@ public class PrefabSpawner : MonoBehaviour
             var x = _bounds.x * 0.5f;
             var z = _bounds.z * 0.5f;
             var pos = new Vector3(Utility.RandomFloat(-x, x), 0.5f, Utility.RandomFloat(-z, z));
+            
             var transform1 = transform;
-            Instantiate(_prefab, transform1.position + pos, Quaternion.identity, transform1);
+            var worldPos = transform1.position + pos;
+            
+            if (!Physics.Raycast(worldPos, Vector3.down, out var hit, Mathf.Infinity, 1 << 13)) continue;
+            
+
+            worldPos.y = hit.point.y;
+            worldPos.y += 0.5f;
+            
+            
+            Instantiate(_prefab, worldPos, Quaternion.identity, transform1);
         }
     }
 
@@ -37,7 +50,7 @@ public class PrefabSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = _gizmoColor;
         Gizmos.DrawWireCube(transform.position, _bounds);
     }
 }

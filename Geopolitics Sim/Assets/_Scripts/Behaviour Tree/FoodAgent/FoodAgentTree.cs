@@ -36,7 +36,7 @@ public class FoodAgentTree : BTree
     /*DYNAMIC*/
     private float _hungerDecreaseRate = 0.01f;
     private float _thirstDecreaseRate= 0.01f;
-
+    
     private void Start()
     {
         ReproductionCooldown = 200;
@@ -53,6 +53,8 @@ public class FoodAgentTree : BTree
         Food = null;
         Water = null;
         if(Target != null && !Target.CompareTag("Target")) Target = null;
+        
+        
 
         if(ReproductionCooldown > 0) ReproductionCooldown--;
         

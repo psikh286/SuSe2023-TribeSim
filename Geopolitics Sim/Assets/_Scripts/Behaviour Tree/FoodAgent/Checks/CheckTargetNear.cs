@@ -18,7 +18,7 @@ public class CheckTargetNear: Node
             return _state;
         }
 
-        if (Vector3.Distance(_root.transform.position, target.position) > 0.01f)
+        if (Vector2.Distance(Vector3ToVector2(_root.transform.position), Vector3ToVector2(target.position)) > 0.01f)
         {
             _state = NodeState.FAILURE;
         }
@@ -30,5 +30,10 @@ public class CheckTargetNear: Node
         }
 
         return _state;
+    }
+    
+    private static Vector2 Vector3ToVector2(Vector3 v)
+    {
+        return new Vector2(v.x, v.z);
     }
 }

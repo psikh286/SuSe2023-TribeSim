@@ -1,12 +1,13 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BoxFoodFinder : MonoBehaviour, IFoodFinder
 {
     [SerializeField] private Vector3 _halfSize;
     [SerializeField] private int _maxTargets;
     [SerializeField] private bool _drawGizmos;
-    
+
     public IFood FindFood(Type type)
     {
         var hitColliders = new Collider[_maxTargets];
@@ -23,7 +24,7 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
         Collider GetClosestCollider()
         {
             var bestDistance = float.MaxValue;
-            var pos = transform.position;
+            var pos = Vector3ToVector2(transform.position);
             Collider bestCollider = null;
             
             for (var j = 0; j < i; j++)
@@ -31,7 +32,7 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
                 if (!hitColliders[j].TryGetComponent<IFood>(out var f)) continue;
                 if (f.GetType() != type) continue;
                 
-                var distance = Vector3.Distance(pos, hitColliders[j].transform.position);
+                var distance = Vector2.Distance(Vector3ToVector2(hitColliders[j].transform.position), pos);
 
                 if (Math.Abs(distance) > bestDistance) continue;
                 
@@ -41,6 +42,11 @@ public class BoxFoodFinder : MonoBehaviour, IFoodFinder
  
             return bestCollider;
         }
+    }
+    
+    private static Vector2 Vector3ToVector2(Vector3 v)
+    {
+        return new Vector2(v.x, v.z);
     }
 
     private void OnDrawGizmos()
